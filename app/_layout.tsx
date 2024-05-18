@@ -1,37 +1,54 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { ThemeProvider as NavProvider } from '@react-navigation/native'
+import {
+  QueryClient,
+  QueryClientProvider
+} from '@tanstack/react-query'
+import { Slot, useNavigation, useRouter, useSegments } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
+import { useEffect } from 'react'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import Snackbar from 'src/components/snackbar/Snackbar'
+import SnackbarProvider from 'src/components/snackbar/SnackbarProvider'
+import { navTheme } from 'src/config/theme'
+import { useAppStore } from 'src/store/store'
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+const queryClient = new QueryClient();
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+export default function AppLayout() {
+  useAuthHandler();
+  
+  return (
+    <GestureHandlerRootView>
+      <SnackbarProvider>
+        <QueryClientProvider client={queryClient}>
+          <Snackbar />
+          <StatusBar style="light" />
+          <NavProvider value={navTheme}>
+            <Slot />
+          </NavProvider>
+        </QueryClientProvider>
+      </SnackbarProvider>
+    </GestureHandlerRootView>
+  )
+}
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+const useAuthHandler = () => {
+  const navigation = useNavigation();
+  const router = useRouter();
+  const segments = useSegments();
+  const token = useAppStore(state => state.token);
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
+    const inProtectedGroup = segments[0] === '(protected)'
+    if (token.isLoggedIn && !inProtectedGroup) {
+      const route = !token.groupId ? '/no-group' : '/my-group';
+      router.replace(route);
+    } else if (!token.isLoggedIn) {
+      router.replace('/login')
+      navigation.reset({
+        index: 0,
+        routes: [{ name: '(public)' as never }],
+      })
     }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
-  );
+  }, [navigation, token])
 }
