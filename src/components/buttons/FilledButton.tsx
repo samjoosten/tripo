@@ -5,7 +5,7 @@ import { MotiPressable, type MotiPressableProps } from "moti/interactions";
 import LottieView from 'lottie-react-native';
 import { sizing } from "src/config/theme";
 import { COLORS } from "src/config/colors";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 interface Props extends MotiPressableProps {
   fillColor?: string;
@@ -30,7 +30,7 @@ export const FilledButton = (props: Props) => {
       },
       []
     )} disabled={props.disabled || props.loading}>
-      <View className="flex-row items-center justify-center" style={{ height: 60, backgroundColor: props.fillColor ?? COLORS.primary800, borderRadius: 12 }}>
+      <View className="flex-row items-center justify-center" style={{ height: 60, backgroundColor: props.fillColor ?? COLORS.primary800, borderRadius: 12, borderCurve: 'continuous' }}>
         <FilledContent {...props} />
       </View>
     </MotiPressable>
@@ -38,13 +38,23 @@ export const FilledButton = (props: Props) => {
 }
 
 const FilledContent = (props: Props) => {
+  const animationRef = useRef<LottieView>(null);
+
+  useEffect(() => {
+    if (props.loading) {
+      animationRef.current?.play();
+    } else {
+      animationRef.current?.pause();
+    }
+  }, []);
+  
   if (!props.renderContent && !props.label) {
     throw new Error('Filled variant requires label or renderContent')
   }
 
   if (props.loading && !props.renderLoading) {
     return (
-      <LottieView autoPlay style={{ height: 60 }} source={require('src/assets/animations/loading-dots.json')} />
+      <LottieView autoPlay style={{ height: 60, width: 60 }} source={require('src/assets/animations/loading-dots.json')} />
     )
   }
 

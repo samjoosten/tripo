@@ -39,8 +39,8 @@ const useAuthHandler = () => {
   const token = useAppStore(state => state.token);
 
   useEffect(() => {
-    const inProtectedGroup = segments[0] === '(protected)'
-    if (token.isLoggedIn && !inProtectedGroup) {
+    const inProtectedGroup = segments[0] === '(protected)';
+    if (token.isLoggedIn) {
       const route = !token.groupId ? '/no-group' : '/my-group';
       router.replace(route);
     } else if (!token.isLoggedIn) {

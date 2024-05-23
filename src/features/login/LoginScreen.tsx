@@ -57,8 +57,9 @@ export const LoginScreen = () => {
                   onChangeText={onChange}
                   value={value}
                   secureTextEntry
+                  style={{ lineHeight: 15 }}
                   placeholder='Voer je wachtwoord in'
-                  error={errors.password && 'Wachtwoord verplicht veld'}
+                  error={errors.password && 'Wachtwoord is een verplicht veld'}
                   AfterIcon={Eye}
                 />
               )}

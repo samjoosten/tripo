@@ -24,6 +24,7 @@ export const IconButton = (props: Props) => {
           backgroundColor: props.fillColor,
           borderColor: props.borderColor ?? COLORS.border,
           borderWidth: 1,
+          borderCurve: 'continuous'
         }}>
           <IconContent {...props} />
         </View>

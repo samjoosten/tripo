@@ -32,7 +32,8 @@ export const FormInput = (props: Props) => {
           borderWidth: 1,
           borderColor: strokeColor,
           borderRadius: 12,
-          backgroundColor: COLORS.primary100
+          backgroundColor: COLORS.primary100,
+          borderCurve: 'continuous'
         }}>
           {props.PreIcon && <props.PreIcon size={sizing.ICON_SIZE_S} color={strokeColor} />}
           <TextInput

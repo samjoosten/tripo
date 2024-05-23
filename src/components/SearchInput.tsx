@@ -25,7 +25,7 @@ export const SearchInput = (props: SearchInputProps) => {
         {
           props.loading && (
             <View style={{ width: 30, right: 0, marginRight: 10, position: 'absolute' }}>
-              <LottieView autoPlay style={{ width: 30}} source={require('src/assets/animations/loading-dots-color-border.json')} />
+              <LottieView autoPlay style={{ width: 30, height: 30 }} source={require('src/assets/animations/loading-dots-color-border.json')} />
             </View>
           )
         }

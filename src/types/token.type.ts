@@ -19,6 +19,13 @@ export class TokenInstance implements Token {
     return this.accessToken !== '';
   }
 
+  get inviteGroupName(): string | null {
+    const decodedToken = jwtDecode(this.accessToken);
+    if (!decodedToken) return null;
+    const inviteGroupName = (decodedToken as any).inviteGroupName as string | null;
+    return inviteGroupName;
+  }
+
   get groupId(): string | null {
     const decodedToken = jwtDecode(this.accessToken);
     if (!decodedToken) return null;
