@@ -3,7 +3,7 @@ import type { AxiosResponse } from "axios";
 import axiosInstance from "src/axios.index";
 import { BASE_URL } from "src/config/config";
 import { useAppStore } from "src/store/store";
-import type { Token } from "src/types/token.type";
+import type { Token } from "src/types/token";
 
 export const useRefreshTokenMutation = () => {
   const fetchRefreshToken = async () => {

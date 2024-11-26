@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigation, useRouter } from "expo-router";
 import { ActivityIndicator, View } from "react-native";
-import { TitleText } from "src/components/Text";
+import { H1Text, TitleText } from "src/components/Text";
 import { FilledButton } from "src/components/buttons/FilledButton";
 import { TextButton } from "src/components/buttons/TextButton";
 import { useApplicationUserQuery } from "src/hooks/queries/useApplicationUserQuery";
@@ -30,7 +30,7 @@ export const GroupScreen = () => {
     <View className="flex-col flex-1 justify-center">
       {isFetching && <ActivityIndicator/>}
       {user && <View className="flex-col items-center">
-        <TitleText className="text-gray-900 mb-3">Welkom terug, {user.name}!</TitleText>
+        <H1Text className="text-gray-900 mb-3">{user.group?.name}</H1Text>
         <TextButton onPress={handleLogout} label="Uitloggen"/>
       </View>}
     </View>

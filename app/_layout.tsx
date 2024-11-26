@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { ThemeProvider as NavProvider } from '@react-navigation/native'
 import {
   QueryClient,
@@ -7,7 +8,7 @@ import { Slot, useNavigation, useRouter, useSegments } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { useEffect } from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import Snackbar from 'src/components/snackbar/Snackbar'
+import SnackbarRoot from 'src/components/snackbar/Snackbar'
 import SnackbarProvider from 'src/components/snackbar/SnackbarProvider'
 import { navTheme } from 'src/config/theme'
 import { useAppStore } from 'src/store/store'
@@ -21,7 +22,7 @@ export default function AppLayout() {
     <GestureHandlerRootView>
       <SnackbarProvider>
         <QueryClientProvider client={queryClient}>
-          <Snackbar />
+          <SnackbarRoot />
           <StatusBar style="light" />
           <NavProvider value={navTheme}>
             <Slot />

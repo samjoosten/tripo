@@ -1,47 +1,19 @@
 import { useEffect, useRef } from "react";
-import { Animated, Dimensions, Easing, SafeAreaView, View } from "react-native";
+import { Dimensions, Easing, SafeAreaView, View } from "react-native";
 import { COLORS } from "src/config/colors";
 import { LabelText } from "../Text";
-import { useSnackbar } from "./snackbar.hooks";
-import { SnackbarType } from "./snackbar.types";
+import { useSnackbar } from "./hooks";
+import { SnackbarType } from "./types";
+import Animated, { useSharedValue, } from "react-native-reanimated";
 
 const SNACKBAR_HEIGHT = 80;
 
-const Snackbar = () => {
+const SnackbarRoot = () => {
   const context = useSnackbar();
   const fillColor = context.snackbar?.type === SnackbarType.SUCCESS ? COLORS.green400 : COLORS.red400;
 
   const { height } = Dimensions.get('window');
-  const y = useRef(new Animated.Value(height)).current;
-
-  useEffect(() => {
-    if (!context.snackbar) {
-      return;
-    }
-
-    let timeout: NodeJS.Timeout;
-    Animated.timing(y, {
-      toValue: height - SNACKBAR_HEIGHT,
-      duration: 200,
-      easing: Easing.ease,
-      useNativeDriver: true,
-    }).start(() => {
-      timeout = setTimeout(() => {
-        Animated.timing(y, {
-          toValue: height,
-          duration: 200,
-          easing: Easing.ease,
-          useNativeDriver: true,
-        }).start(() => {
-          context.closeSnackbar();
-        });
-      }, context.snackbar?.duration ?? 2000);
-    });
-
-    return () => {
-      clearTimeout(timeout);
-    }
-  }, [context.snackbar, y]);
+  const y = useSharedValue(-SNACKBAR_HEIGHT);
 
   if (!context.snackbar) {
     return null;
@@ -60,4 +32,4 @@ const Snackbar = () => {
   )
 };
 
-export default Snackbar;
+export default SnackbarRoot;

@@ -1,7 +1,7 @@
 import axios, { AxiosError, type AxiosResponse } from "axios";
 import { BASE_URL } from "./config/config";
 import { useAppStore } from "./store/store";
-import type { Token } from "./types/token.type";
+import type { Token } from "./types/token";
 import { router } from "expo-router";
 
 const axiosInstance = axios.create({

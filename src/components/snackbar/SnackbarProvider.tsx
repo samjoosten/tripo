@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import type { Snackbar, SnackbarContextValues } from './snackbar.types';
+import type { Snackbar, SnackbarContextValues } from './types';
 
 export const SnackbarContext = createContext<SnackbarContextValues>({} as SnackbarContextValues);
 

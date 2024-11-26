@@ -9,6 +9,8 @@
     "jsx": "react-jsx",
     "allowJs": true,
     "moduleResolution": "bundler",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,
@@ -17,6 +19,7 @@
     "noFallthroughCasesInSwitch": true,
     "useUnknownInCatchVariables": true,
     "noPropertyAccessFromIndexSignature": false,
+    "strictPropertyInitialization": false,
     "baseUrl": ".",
     "paths": {
       "src/*": [

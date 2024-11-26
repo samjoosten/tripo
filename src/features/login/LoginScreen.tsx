@@ -9,8 +9,8 @@ import { useState } from "react";
 import type { LoginFormData } from "./types";
 import { FilledButton } from "src/components/buttons/FilledButton";
 import { TextButton } from "src/components/buttons/TextButton";
-import { useSnackbar } from "src/components/snackbar/snackbar.hooks";
-import { SnackbarType } from "src/components/snackbar/snackbar.types";
+import { useSnackbar } from "src/components/snackbar/hooks";
+import { SnackbarType } from "src/components/snackbar/types";
 import { useLoginMutation } from "./queries";
 
 export const LoginScreen = () => {

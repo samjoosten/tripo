@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage, type StateStorage } from 'zustand/middleware'
 import { MMKV } from 'react-native-mmkv';
-import { TokenInstance, type Token } from 'src/types/token.type';
+import { TokenInstance, type Token } from 'src/types/token';
 
 const storage = new MMKV();
 const stateStorage: StateStorage = {

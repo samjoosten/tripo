@@ -1,8 +1,8 @@
 import { useQuery, type QueryKey, type UseQueryOptions, type QueryFunctionContext, useMutation } from "@tanstack/react-query";
 import { router } from "expo-router";
 import axiosInstance from "src/axios.index";
-import { useSnackbar } from "src/components/snackbar/snackbar.hooks";
-import { SnackbarType } from "src/components/snackbar/snackbar.types";
+import { useSnackbar } from "src/components/snackbar/hooks";
+import { SnackbarType } from "src/components/snackbar/types";
 import { useRefreshTokenMutation } from "src/hooks/queries/useRefreshTokenQuery";
 
 export type UserSearchResponse = Array<UserSearchResult>

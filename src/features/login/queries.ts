@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import type { LoginFormData } from "./types";
 import { useAppStore } from "src/store/store";
 import axiosInstance from "src/axios.index";
-import type { Token } from "src/types/token.type";
+import type { Token } from "src/types/token";
 
 export const useLoginMutation = (options?: UseMutationOptions<void, Error, LoginFormData, LoginFormData>) => {
   const setToken = useAppStore(state => state.setToken);
