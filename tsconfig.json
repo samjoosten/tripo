@@ -1,37 +1,18 @@
 {
+  "extends": "@react-native/typescript-config/tsconfig.json", /* Recommended React Native TSConfig base */
   "compilerOptions": {
-    "lib": [
-      "ESNext"
-    ],
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleDetection": "force",
     "jsx": "react-jsx",
-    "allowJs": true,
-    "moduleResolution": "bundler",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "noEmit": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "noFallthroughCasesInSwitch": true,
-    "useUnknownInCatchVariables": true,
-    "noPropertyAccessFromIndexSignature": false,
-    "strictPropertyInitialization": false,
+    /* Visit https://aka.ms/tsconfig.json to read more about this file */
+    /* Completeness */
+    "skipLibCheck": true, /* Skip type checking all .d.ts files. */
     "baseUrl": ".",
     "paths": {
-      "src/*": [
-        "src/*"
+      "*": [
+        "./src/*"
       ]
-    }
+    },
   },
-  "extends": "expo/tsconfig.base",
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "./**/*",
   ]
 }
