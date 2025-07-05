@@ -14,6 +14,9 @@ SplashScreen.setOptions({
   fade: true,
 });
 
+if (Constants.expoConfig?.extra?.storybookEnabled === 'true') {
+  void SplashScreen.hideAsync();
+}
 const App = () => {
   return (
     <GestureHandlerRootView>
@@ -29,6 +32,7 @@ const App = () => {
 let AppEntryPoint = App;
 
 if (Constants.expoConfig?.extra?.storybookEnabled === 'true') {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
   AppEntryPoint = require('../.rnstorybook').default;
 }
 

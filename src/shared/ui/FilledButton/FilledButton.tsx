@@ -20,18 +20,24 @@ type Props = {
 
 export const FilledButton = ({ text, disabled, loading, autowidth, onPress }: Props) => {
   const colors = [cv('azure.400'), cv('azure.600')];
-  const [layout, setLayout] = useState({ width: 0, height: 0 });
+  const buttonWidth = useSharedValue(0);
+  const buttonHeight = useSharedValue(0);
+  const end = useDerivedValue(() => ({
+    x: buttonWidth.value,
+    y: buttonHeight.value,
+  }));
 
   const onLayout = (event: LayoutChangeEvent) => {
     const { width, height } = event.nativeEvent.layout;
-    setLayout({ width, height });
+    buttonWidth.value = width;
+    buttonHeight.value = height;
   };
 
   return (
     <View style={[styles.container, !autowidth ? { width: '100%' } : {}]} onLayout={onLayout}>
       <Canvas style={styles.canvas}>
-        <Rect x={0} y={0} width={layout.width} height={layout.height}>
-          <LinearGradient colors={colors} start={vec(0, 0)} end={vec(layout.width, layout.height)} />
+        <Rect x={0} y={0} width={buttonWidth} height={buttonHeight}>
+          <LinearGradient colors={colors} start={vec(0, 0)} end={end} />
         </Rect>
       </Canvas>
       <Pressable>

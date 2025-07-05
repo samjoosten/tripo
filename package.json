@@ -48,6 +48,8 @@
     "@feature-sliced/steiger-plugin": "^0.5.6",
     "@gorhom/bottom-sheet": "^5.1.6",
     "@react-native-async-storage/async-storage": "2.1.2",
+    "@storybook/addon-ondevice-actions": "^9.0.14",
+    "@storybook/addon-ondevice-controls": "^9.0.14",
     "@storybook/react-native": "^9.0.14",
     "@types/react": "~19.0.10",
     "babel-preset-expo": "~13.0.0",
