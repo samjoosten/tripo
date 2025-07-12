@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import type { LayoutChangeEvent } from 'react-native';
 import { Pressable } from 'react-native';
 import Animated, {
+  Easing,
   interpolate,
   useAnimatedStyle,
   useDerivedValue,
@@ -90,12 +91,12 @@ export const FilledButton = ({ text, disabled, loading, autowidth, leadingIcon, 
 
   const onPressIn = () => {
     if (isDisabled) return;
-    buttonScale.value = withTiming(0.97, { duration: 100 });
+    buttonScale.value = withTiming(0.97, { duration: 200, easing: Easing.inOut(Easing.ease) });
   };
 
   const onPressOut = () => {
     if (isDisabled) return;
-    buttonScale.value = withTiming(1, { duration: 100 });
+    buttonScale.value = withTiming(1, { duration: 200, easing: Easing.inOut(Easing.ease) });
   };
 
   return (

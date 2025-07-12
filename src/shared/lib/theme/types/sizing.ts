@@ -1,3 +1,5 @@
 import type { SIZING } from '../const/sizing';
 
-export type SizingType = `${keyof typeof SIZING}.${keyof (typeof SIZING)[keyof typeof SIZING]}`;
+export type SizingType = {
+  [K in keyof typeof SIZING]: `${K & string}.${keyof (typeof SIZING)[K] & string}`;
+}[keyof typeof SIZING];
