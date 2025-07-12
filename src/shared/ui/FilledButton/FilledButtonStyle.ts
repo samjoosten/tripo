@@ -20,4 +20,10 @@ export const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+  content: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    columnGap: sv('spacing.xs'),
+  },
 });

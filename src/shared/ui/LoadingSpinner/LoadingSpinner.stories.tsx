@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
+import { sv } from 'shared/lib/theme';
+
 import { LoadingSpinner } from './LoadingSpinner';
 
 const meta = {
@@ -13,6 +15,10 @@ const meta = {
       </View>
     ),
   ],
+  argTypes: {
+    color: { control: 'color' },
+    size: { control: 'number', defaultValue: sv('spacing.m') },
+  },
 } satisfies Meta<typeof LoadingSpinner>;
 
 export default meta;

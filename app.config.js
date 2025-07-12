@@ -6,7 +6,7 @@ module.exports = {
   "icon": "./assets/icon.png",
   "userInterfaceStyle": "automatic",
   "newArchEnabled": true,
-  "scheme": "drinks",
+  "scheme": "tripo",
   "ios": {
     "supportsTablet": true,
     "bundleIdentifier": "com.samjoosten.tripo"
@@ -31,6 +31,14 @@ module.exports = {
       }
     ],
     "react-native-edge-to-edge",
-    "expo-font"
+    ["expo-font", {
+      'fonts': [
+        './assets/fonts/Gilroy-Medium.ttf',
+        './assets/fonts/Gilroy-SemiBold.ttf',
+        './assets/fonts/Gilroy-Light.ttf',
+        './assets/fonts/Gilroy-Regular.ttf',
+        './assets/fonts/ArchitectsDaughter-Regular.ttf'
+      ]
+    }]
   ]
 }

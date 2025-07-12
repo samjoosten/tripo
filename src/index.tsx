@@ -5,6 +5,7 @@ import Constants from 'expo-constants';
 
 import Navigation from 'app/navigation/Navigation';
 import { InitProvider } from 'app/providers/init-provider';
+import { useCacheAssets } from 'app/providers/init-provider/use-cache-assets';
 
 // Keep the splash screen visible while we fetch resources
 void SplashScreen.preventAutoHideAsync();
@@ -18,6 +19,8 @@ if (Constants.expoConfig?.extra?.storybookEnabled === 'true') {
   void SplashScreen.hideAsync();
 }
 const App = () => {
+  useCacheAssets();
+
   return (
     <GestureHandlerRootView>
       <SafeAreaProvider>

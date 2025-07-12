@@ -1,25 +1,42 @@
-import type { LayoutChangeEvent } from 'react-native';
-import { Pressable, View } from 'react-native';
 import { Canvas, LinearGradient, Rect, vec } from '@shopify/react-native-skia';
-import { useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
-import { useState } from 'react';
+import { useEffect } from 'react';
+import type { LayoutChangeEvent } from 'react-native';
+import { Pressable } from 'react-native';
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useDerivedValue,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 import { cv } from 'shared/lib/theme';
-
-import { ThemedText } from '../ThemedText';
+import { LoadingSpinner } from 'shared/ui/LoadingSpinner';
+import { ThemedText } from 'shared/ui/ThemedText';
+import { ThemedIcon, type IconSvgObject } from 'shared/ui/ThemedIcon';
 
 import { styles } from './FilledButtonStyle';
+
+const ACTIVE_COLORS = [cv('azure.400'), cv('azure.600')];
+const DISABLED_COLOR = cv('gray.300');
 
 type Props = {
   text: string;
   disabled?: boolean;
   loading?: boolean;
   autowidth?: boolean;
+  leadingIcon?: IconSvgObject;
+  trailingIcon?: IconSvgObject;
   onPress?: () => void;
 };
 
-export const FilledButton = ({ text, disabled, loading, autowidth, onPress }: Props) => {
-  const colors = [cv('azure.400'), cv('azure.600')];
+export const FilledButton = ({ text, disabled, loading, autowidth, leadingIcon, trailingIcon, onPress }: Props) => {
+  const isDisabled = disabled || loading;
+  const firstColor = useSharedValue(ACTIVE_COLORS[0]);
+  const secondColor = useSharedValue(ACTIVE_COLORS[1]);
+  const colors = useDerivedValue(() => [firstColor.value, secondColor.value]);
+  const buttonScale = useSharedValue(1);
+
   const buttonWidth = useSharedValue(0);
   const buttonHeight = useSharedValue(0);
   const end = useDerivedValue(() => ({
@@ -27,22 +44,86 @@ export const FilledButton = ({ text, disabled, loading, autowidth, onPress }: Pr
     y: buttonHeight.value,
   }));
 
+  const loaderOpacity = useSharedValue(0);
+
+  useEffect(() => {
+    if (loading) {
+      loaderOpacity.value = withTiming(1, { duration: 300 });
+    } else {
+      loaderOpacity.value = withTiming(0, { duration: 300 });
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    if (isDisabled) {
+      firstColor.value = withTiming(DISABLED_COLOR, { duration: 300 });
+      secondColor.value = withTiming(DISABLED_COLOR, { duration: 300 });
+    } else {
+      firstColor.value = withTiming(ACTIVE_COLORS[0], { duration: 300 });
+      secondColor.value = withTiming(ACTIVE_COLORS[1], { duration: 300 });
+    }
+  }, [isDisabled]);
+
+  const aLoaderStyle = useAnimatedStyle(() => {
+    return {
+      opacity: loaderOpacity.value,
+    };
+  });
+
+  const aContentStyle = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(loaderOpacity.value, [0, 1], [1, 0]),
+    };
+  });
+
+  const aButtonContainerStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: buttonScale.value }],
+    };
+  });
+
   const onLayout = (event: LayoutChangeEvent) => {
     const { width, height } = event.nativeEvent.layout;
     buttonWidth.value = width;
     buttonHeight.value = height;
   };
 
+  const onPressIn = () => {
+    if (isDisabled) return;
+    buttonScale.value = withTiming(0.97, { duration: 100 });
+  };
+
+  const onPressOut = () => {
+    if (isDisabled) return;
+    buttonScale.value = withTiming(1, { duration: 100 });
+  };
+
   return (
-    <View style={[styles.container, !autowidth ? { width: '100%' } : {}]} onLayout={onLayout}>
-      <Canvas style={styles.canvas}>
-        <Rect x={0} y={0} width={buttonWidth} height={buttonHeight}>
-          <LinearGradient colors={colors} start={vec(0, 0)} end={end} />
-        </Rect>
-      </Canvas>
-      <Pressable>
-        <ThemedText type='button'>{text}</ThemedText>
-      </Pressable>
-    </View>
+    <Pressable
+      onPress={onPress}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
+      disabled={isDisabled}
+      style={!autowidth ? { width: '100%' } : {}}>
+      <Animated.View
+        style={[styles.container, aButtonContainerStyle, !autowidth ? { width: '100%' } : {}]}
+        onLayout={onLayout}>
+        <Canvas style={styles.canvas}>
+          <Rect x={0} y={0} width={buttonWidth} height={buttonHeight}>
+            <LinearGradient colors={colors} start={vec(0, 0)} end={end} />
+          </Rect>
+        </Canvas>
+        {!!loading && (
+          <Animated.View style={[aLoaderStyle, { position: 'absolute' }]}>
+            <LoadingSpinner />
+          </Animated.View>
+        )}
+        <Animated.View style={[aContentStyle, styles.content]}>
+          {!!leadingIcon && <ThemedIcon icon={leadingIcon} color={cv('white')} />}
+          <ThemedText type='button'>{text}</ThemedText>
+          {!!trailingIcon && <ThemedIcon icon={trailingIcon} color={cv('white')} />}
+        </Animated.View>
+      </Animated.View>
+    </Pressable>
   );
 };
