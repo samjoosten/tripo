@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
 
-import { useCacheAssets } from './use-cache-assets';
+import { useCacheAssets } from './useCacheAssets';
 
 export const InitProvider = ({ children }: PropsWithChildren) => {
   const fontsLoaded = useCacheAssets();

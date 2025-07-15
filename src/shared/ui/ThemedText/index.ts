@@ -1,1 +1,1 @@
-export { ThemedText } from './ThemedText';
+export { ThemedText, AnimatedThemedText } from './ThemedText';

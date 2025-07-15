@@ -4,8 +4,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Constants from 'expo-constants';
 
 import Navigation from 'app/navigation/Navigation';
-import { InitProvider } from 'app/providers/init-provider';
-import { useCacheAssets } from 'app/providers/init-provider/use-cache-assets';
+import { InitProvider } from 'app/providers/InitProvider';
+import { useCacheAssets } from 'app/providers/InitProvider/useCacheAssets';
 
 // Keep the splash screen visible while we fetch resources
 void SplashScreen.preventAutoHideAsync();
@@ -18,6 +18,7 @@ SplashScreen.setOptions({
 if (Constants.expoConfig?.extra?.storybookEnabled === 'true') {
   void SplashScreen.hideAsync();
 }
+
 const App = () => {
   useCacheAssets();
 
