@@ -31,6 +31,7 @@ module.exports = {
       }
     ],
     "react-native-edge-to-edge",
+    "expo-localization",
     ["expo-font", {
       'fonts': [
         './assets/fonts/Gilroy-Medium.ttf',

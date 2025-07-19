@@ -1,12 +1,13 @@
-import { View } from 'react-native';
+import { t } from 'i18next';
 
 import { FilledButton } from 'shared/ui/FilledButton';
+import { ScreenContent } from 'shared/ui/ScreenContent';
 import { ShadowView } from 'shared/ui/ShadowView';
 import { ThemedText } from 'shared/ui/ThemedText';
 
 const LoginScreen = () => {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <ScreenContent>
       <FilledButton text='Test' />
       <ShadowView
         style={{
@@ -17,9 +18,9 @@ const LoginScreen = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <ThemedText type='body'>Hallo continuous</ThemedText>
+        <ThemedText type='body'>{t('login.title')}</ThemedText>
       </ShadowView>
-    </View>
+    </ScreenContent>
   );
 };
 
