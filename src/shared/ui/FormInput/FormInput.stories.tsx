@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
-import { EyeIcon } from '@hugeicons/core-free-icons';
+import { EyeIcon } from '@hugeicons-pro/core-stroke-rounded';
+import Animated, { LinearTransition } from 'react-native-reanimated';
 
 import { cv, sv } from 'shared/lib/theme';
 
@@ -15,11 +16,11 @@ const meta = {
         style={{
           flex: 1,
           justifyContent: 'center',
-          paddingHorizontal: sv('spacing.lg'),
           backgroundColor: cv('scaffold'),
-          paddingBottom: 100,
         }}>
-        <Story />
+        <Animated.View layout={LinearTransition} style={{ paddingHorizontal: sv('spacing.lg'), paddingBottom: 150 }}>
+          <Story />
+        </Animated.View>
       </View>
     ),
   ],
@@ -49,7 +50,7 @@ export const TrailingIcon: Story = {
     label: 'Label',
     error: '',
     placeholder: '',
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     trailingIcon: EyeIcon,
   },
 };

@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import type { NativeSyntheticEvent, TextInputFocusEventData, TextInputProps } from 'react-native';
-import { Pressable, StyleSheet, TextInput } from 'react-native';
-import Animated, { LinearTransition, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { Pressable, StyleSheet, TextInput, View } from 'react-native';
+import Animated, { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { cv, sv } from 'shared/lib/theme';
 
+import { RoundedView } from '../RoundedView/RoundedView';
 import { ThemedIcon, type IconSvgObject } from '../ThemedIcon';
 import { AnimatedThemedText, ThemedText } from '../ThemedText';
 
@@ -16,6 +17,8 @@ type Props = {
   onTrailingIconPress?: () => void;
 } & TextInputProps;
 
+const AnimatedIcon = Animated.createAnimatedComponent(ThemedIcon);
+
 export const FormInput = ({
   showFocus,
   label,
@@ -26,7 +29,6 @@ export const FormInput = ({
   onTrailingIconPress,
   ...rest
 }: Props) => {
-  const [isFocused, setIsFocused] = useState(false);
   const color = useSharedValue(cv('powderBlue.200'));
 
   useEffect(() => {
@@ -40,7 +42,6 @@ export const FormInput = ({
   const handleFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
     if (!showFocus) return;
 
-    setIsFocused(true);
     color.value = withTiming(cv('azure.400'), { duration: 200 });
     onFocus?.(e);
   };
@@ -48,29 +49,22 @@ export const FormInput = ({
   const handleBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
     if (!showFocus) return;
 
-    setIsFocused(false);
     color.value = withTiming(cv('powderBlue.200'), { duration: 200 });
     onBlur?.(e);
   };
 
-  const getIconColor = () => {
-    if (error) return cv('red.400');
-    if (isFocused) return cv('azure.400');
-    return cv('powderBlue.200');
-  };
-
-  const aContainerStyle = useAnimatedStyle(() => ({
-    borderColor: color.value,
-  }));
+  const animatedProps = useAnimatedProps(() => {
+    return { color: color.value };
+  });
 
   return (
-    <Animated.View style={styles.container} layout={LinearTransition}>
+    <>
       {!!label && (
         <AnimatedThemedText type='secondary' color={color}>
           {label}
         </AnimatedThemedText>
       )}
-      <Animated.View style={[styles.inputContainer, aContainerStyle]}>
+      <RoundedView style={[styles.inputContainer]} borderWidth={2} borderColor={color}>
         <TextInput
           cursorColor={cv('azure.500')}
           selectionColor={cv('azure.500')}
@@ -82,32 +76,30 @@ export const FormInput = ({
         />
         {!!trailingIcon && (
           <Pressable onPress={onTrailingIconPress} hitSlop={sv('spacing.sm')} style={styles.icon}>
-            <ThemedIcon icon={trailingIcon} color={getIconColor()} />
+            <AnimatedIcon icon={trailingIcon} animatedProps={animatedProps} />
           </Pressable>
         )}
-      </Animated.View>
+      </RoundedView>
       {!!error && (
-        <ThemedText type='secondary' color='red.400'>
-          {error}
-        </ThemedText>
+        <View style={{ marginTop: sv('spacing.xs') }}>
+          <ThemedText type='secondary' color='red.400'>
+            {error}
+          </ThemedText>
+        </View>
       )}
-    </Animated.View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    rowGap: sv('spacing.xs'),
-  },
   inputContainer: {
     borderRadius: 12,
-    borderWidth: 1,
     borderColor: cv('powderBlue.200'),
-    borderCurve: 'continuous',
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: cv('white'),
     columnGap: sv('spacing.xs'),
+    marginTop: sv('spacing.xs'),
   },
   input: {
     flexGrow: 1,

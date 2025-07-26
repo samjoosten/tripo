@@ -6,13 +6,16 @@ import LoginScreen from 'screens/login/ui/LoginScreen';
 import type { NavigationStackLists } from 'shared/routes';
 import { AppNavigation } from 'shared/routes';
 
+import { TabNavigation } from './TabNavigation';
+
 export const Stack = createNativeStackNavigator<NavigationStackLists>();
 
 const Navigation = () => {
   return (
     <NavigationContainer onReady={() => SplashScreen.hideAsync()}>
-      <Stack.Navigator initialRouteName={AppNavigation.LOGIN}>
-        <Stack.Screen name={AppNavigation.LOGIN} component={LoginScreen} />
+      <Stack.Navigator initialRouteName={AppNavigation.MAIN}>
+        {/* <Stack.Screen name={AppNavigation.MAIN} component={LoginScreen} /> */}
+        <Stack.Screen name={AppNavigation.MAIN} options={{ headerShown: false }} component={TabNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -3,7 +3,7 @@ import type { NavigationTabLists } from './tab-navigation';
 export enum AppNavigation {
   LOGIN = 'Login',
   REGISTER = 'Register',
-  MAIN = 'Home',
+  MAIN = 'Main',
   PROFILE = 'Profile',
   SETTINGS = 'Settings',
 }

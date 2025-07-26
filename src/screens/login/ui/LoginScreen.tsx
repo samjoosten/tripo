@@ -1,17 +1,18 @@
 import { t } from 'i18next';
 
 import { FilledButton } from 'shared/ui/FilledButton';
+import { RoundedView } from 'shared/ui/RoundedView/RoundedView';
 import { ScreenContent } from 'shared/ui/ScreenContent';
-import { ShadowView } from 'shared/ui/ShadowView';
 import { ThemedText } from 'shared/ui/ThemedText';
 
 const LoginScreen = () => {
   return (
     <ScreenContent>
       <FilledButton text='Test' />
-      <ShadowView
+      <RoundedView
+        withShadow
         style={{
-          borderRadius: 20,
+          borderRadius: 12,
           borderCurve: 'continuous',
           padding: 24,
           backgroundColor: 'white',
@@ -19,7 +20,7 @@ const LoginScreen = () => {
           alignItems: 'center',
         }}>
         <ThemedText type='body'>{t('login.title')}</ThemedText>
-      </ShadowView>
+      </RoundedView>
     </ScreenContent>
   );
 };

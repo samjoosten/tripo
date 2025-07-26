@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
-import { SearchIcon } from '@hugeicons/core-free-icons';
+import { SearchIcon } from '@hugeicons-pro/core-stroke-rounded';
 
 import { sv } from 'shared/lib/theme';
 
@@ -45,7 +45,7 @@ export const Default: Story = {
 export const LeadingIcon: Story = {
   args: {
     text: 'Press Me',
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     leadingIcon: SearchIcon,
   },
 };

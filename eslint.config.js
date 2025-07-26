@@ -11,7 +11,7 @@ const reactHooks = require('eslint-plugin-react-hooks');
 const reactNative = require('eslint-plugin-react-native');
 const preferArrow = require('eslint-plugin-prefer-arrow');
 const reactPreferFunctionComponent = require('eslint-plugin-react-prefer-function-component');
-const featureSliced = require('@feature-sliced/eslint-config');
+const featureSliced = require('@conarti/eslint-plugin-feature-sliced');
 
 module.exports = defineConfig([
   // expoConfig,
@@ -73,7 +73,7 @@ module.exports = defineConfig([
       'react-native': reactNative,
       'prefer-arrow': preferArrow,
       'react-prefer-function-component': reactPreferFunctionComponent,
-      '@feature-sliced': featureSliced,
+      '@conarti/feature-sliced': featureSliced,
     },
     settings: {
       react: {
@@ -120,7 +120,7 @@ module.exports = defineConfig([
         { blankLine: 'always', prev: 'import', next: '*' },
         { blankLine: 'any', prev: 'import', next: 'import' },
       ],
-      complexity: ['warn', 10],
+      complexity: ['warn', 15],
       'no-nested-ternary': 'error',
       'arrow-spacing': 'error',
       'default-param-last': 'error',

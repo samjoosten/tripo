@@ -1,6 +1,4 @@
-import { Canvas, LinearGradient, Rect, vec } from '@shopify/react-native-skia';
 import { useEffect } from 'react';
-import type { LayoutChangeEvent } from 'react-native';
 import { Pressable } from 'react-native';
 import Animated, {
   Easing,
@@ -13,8 +11,10 @@ import Animated, {
 
 import { cv } from 'shared/lib/theme';
 import { LoadingSpinner } from 'shared/ui/LoadingSpinner';
-import { ThemedText } from 'shared/ui/ThemedText';
 import { ThemedIcon, type IconSvgObject } from 'shared/ui/ThemedIcon';
+import { ThemedText } from 'shared/ui/ThemedText';
+
+import { RoundedView } from '../RoundedView/RoundedView';
 
 import { styles } from './FilledButtonStyle';
 
@@ -37,13 +37,6 @@ export const FilledButton = ({ text, disabled, loading, autowidth, leadingIcon, 
   const secondColor = useSharedValue(ACTIVE_COLORS[1]);
   const colors = useDerivedValue(() => [firstColor.value, secondColor.value]);
   const buttonScale = useSharedValue(1);
-
-  const buttonWidth = useSharedValue(0);
-  const buttonHeight = useSharedValue(0);
-  const end = useDerivedValue(() => ({
-    x: buttonWidth.value,
-    y: buttonHeight.value,
-  }));
 
   const loaderOpacity = useSharedValue(0);
 
@@ -83,12 +76,6 @@ export const FilledButton = ({ text, disabled, loading, autowidth, leadingIcon, 
     };
   });
 
-  const onLayout = (event: LayoutChangeEvent) => {
-    const { width, height } = event.nativeEvent.layout;
-    buttonWidth.value = width;
-    buttonHeight.value = height;
-  };
-
   const onPressIn = () => {
     if (isDisabled) return;
     buttonScale.value = withTiming(0.97, { duration: 200, easing: Easing.inOut(Easing.ease) });
@@ -106,24 +93,19 @@ export const FilledButton = ({ text, disabled, loading, autowidth, leadingIcon, 
       onPressOut={onPressOut}
       disabled={isDisabled}
       style={!autowidth ? { width: '100%' } : {}}>
-      <Animated.View
-        style={[styles.container, aButtonContainerStyle, !autowidth ? { width: '100%' } : {}]}
-        onLayout={onLayout}>
-        <Canvas style={styles.canvas}>
-          <Rect x={0} y={0} width={buttonWidth} height={buttonHeight}>
-            <LinearGradient colors={colors} start={vec(0, 0)} end={end} />
-          </Rect>
-        </Canvas>
-        {!!loading && (
-          <Animated.View style={[aLoaderStyle, { position: 'absolute' }]}>
-            <LoadingSpinner />
+      <Animated.View style={[aButtonContainerStyle, !autowidth ? { width: '100%' } : {}]}>
+        <RoundedView style={styles.container} gradientColors={colors}>
+          {!!loading && (
+            <Animated.View style={[aLoaderStyle, { position: 'absolute' }]}>
+              <LoadingSpinner />
+            </Animated.View>
+          )}
+          <Animated.View style={[aContentStyle, styles.content]}>
+            {!!leadingIcon && <ThemedIcon icon={leadingIcon} color={cv('white')} />}
+            <ThemedText type='button'>{text}</ThemedText>
+            {!!trailingIcon && <ThemedIcon icon={trailingIcon} color={cv('white')} />}
           </Animated.View>
-        )}
-        <Animated.View style={[aContentStyle, styles.content]}>
-          {!!leadingIcon && <ThemedIcon icon={leadingIcon} color={cv('white')} />}
-          <ThemedText type='button'>{text}</ThemedText>
-          {!!trailingIcon && <ThemedIcon icon={trailingIcon} color={cv('white')} />}
-        </Animated.View>
+        </RoundedView>
       </Animated.View>
     </Pressable>
   );
