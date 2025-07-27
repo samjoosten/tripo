@@ -2,7 +2,7 @@ import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { cv } from 'shared/lib/theme';
+import { cv, sv } from 'shared/lib/theme';
 import { RoundedView } from 'shared/ui/RoundedView/RoundedView';
 
 import { TabIcon } from './TabIcon';
@@ -11,7 +11,7 @@ export const ThemedTabNavigation = (props: BottomTabBarProps) => {
   const { state, descriptors, navigation } = props;
   const { bottom } = useSafeAreaInsets();
   return (
-    <RoundedView withShadow style={[styles.tabContainer, { paddingBottom: bottom }]}>
+    <RoundedView withShadow style={[styles.tabContainer, { paddingBottom: bottom - sv('spacing.xs') }]}>
       {state.routes.map((route, index) => (
         <TabIcon
           key={route.key}

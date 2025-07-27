@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import type { NativeSyntheticEvent, TextInputFocusEventData, TextInputProps } from 'react-native';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
-import Animated, { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
+import { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { cv, sv } from 'shared/lib/theme';
 
 import { RoundedView } from '../RoundedView/RoundedView';
-import { ThemedIcon, type IconSvgObject } from '../ThemedIcon';
+import { AnimatedIcon, type IconSvgObject } from '../ThemedIcon';
 import { AnimatedThemedText, ThemedText } from '../ThemedText';
 
 type Props = {
@@ -16,8 +16,6 @@ type Props = {
   trailingIcon?: IconSvgObject;
   onTrailingIconPress?: () => void;
 } & TextInputProps;
-
-const AnimatedIcon = Animated.createAnimatedComponent(ThemedIcon);
 
 export const FormInput = ({
   showFocus,

@@ -1,3 +1,3 @@
-export { ThemedIcon } from './ThemedIcon';
+export { ThemedIcon, AnimatedIcon } from './ThemedIcon';
 export type { IconSvgObject } from './types';
 export type { HugeiconsProps } from '@hugeicons/react-native';

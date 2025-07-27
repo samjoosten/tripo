@@ -1,5 +1,6 @@
 import { HugeiconsIcon } from '@hugeicons/react-native';
 import type { HugeiconsProps } from '@hugeicons/react-native';
+import Animated from 'react-native-reanimated';
 
 import { cv, sv } from 'shared/lib/theme';
 
@@ -14,3 +15,5 @@ type Props = {
 export const ThemedIcon = ({ icon, size = sv('spacing.m'), color = cv('gray.600'), ...rest }: Props) => {
   return <HugeiconsIcon icon={icon} size={size} color={color} {...rest} />;
 };
+
+export const AnimatedIcon = Animated.createAnimatedComponent(ThemedIcon);

@@ -5,7 +5,7 @@ import { RoundedView } from 'shared/ui/RoundedView/RoundedView';
 import { ScreenContent } from 'shared/ui/ScreenContent';
 import { ThemedText } from 'shared/ui/ThemedText';
 
-const LoginScreen = () => {
+export const LoginScreen = () => {
   return (
     <ScreenContent>
       <FilledButton text='Test' />
@@ -24,5 +24,3 @@ const LoginScreen = () => {
     </ScreenContent>
   );
 };
-
-export default LoginScreen;

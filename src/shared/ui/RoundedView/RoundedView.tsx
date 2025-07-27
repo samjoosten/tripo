@@ -19,6 +19,7 @@ export const RoundedView = ({
   withShadow = false,
   shadowBlur = 14,
   shadowColor = '#E5EEEE',
+  shadowOffset = { x: 0, y: 5 },
 }: SquircleProps) => {
   const flattenStyle = useMemo(() => StyleSheet.flatten(style), [style]);
   const {
@@ -191,7 +192,9 @@ export const RoundedView = ({
               )}
               {!!borderWidth && <Paint color={borderColor} stroke-width={borderWidth} style='stroke' />}
             </Path>
-            {!!withShadow && <Shadow dx={0} dy={5} blur={shadowBlur} color={shadowColor} inner={false} />}
+            {!!withShadow && (
+              <Shadow dx={shadowOffset.x} dy={shadowOffset.y} blur={shadowBlur} color={shadowColor} inner={false} />
+            )}
           </Group>
         </Canvas>
       )}

@@ -10,6 +10,7 @@ export declare type SquircleProps = ViewProps & {
   withShadow?: boolean;
   shadowColor?: string;
   shadowBlur?: number;
+  shadowOffset?: { x: number; y: number };
 };
 
 export declare type CornerParams = {

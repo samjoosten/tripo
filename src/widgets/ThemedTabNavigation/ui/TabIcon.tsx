@@ -16,6 +16,7 @@ import Animated, {
   LinearTransition,
   useAnimatedStyle,
   useSharedValue,
+  withSequence,
   withTiming,
 } from 'react-native-reanimated';
 
@@ -68,6 +69,8 @@ export const TabIcon = (props: Props) => {
     if (!isFocused && !event.defaultPrevented) {
       navigation.navigate(route.name, route.params);
     }
+
+    tabScale.value = withSequence(withTiming(1.2, { duration: 200 }), withTiming(1, { duration: 200 }));
   };
 
   const onLongPress = () => {
@@ -75,14 +78,6 @@ export const TabIcon = (props: Props) => {
       type: 'tabLongPress',
       target: route.key,
     });
-  };
-
-  const onPressIn = () => {
-    tabScale.value = withTiming(0.95, { duration: 150 });
-  };
-
-  const onPressOut = () => {
-    tabScale.value = withTiming(1, { duration: 150 });
   };
 
   const aTabStyle = useAnimatedStyle(() => ({
@@ -97,14 +92,18 @@ export const TabIcon = (props: Props) => {
       testID={options.tabBarButtonTestID}
       onPress={onPress}
       onLongPress={onLongPress}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
       pressOpacity={1}
       android_ripple={null}
       style={{ flex: 1 }}>
       <View style={[styles.tabContainer]}>
         {isMiddleTab ? (
-          <RoundedView style={styles.middleIconContainer}>
+          <RoundedView
+            gradientColors={[cv('azure.400'), cv('azure.600')]}
+            withShadow
+            shadowColor={cv('azure.300')}
+            shadowBlur={7}
+            shadowOffset={{ x: 0, y: 3 }}
+            style={styles.middleIconContainer}>
             <ThemedIcon icon={icon.default} color={cv('white')} size={sv('spacing.lg')} />
           </RoundedView>
         ) : (
@@ -124,20 +123,19 @@ const styles = StyleSheet.create({
   tabContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 8,
-    height: 70,
+    height: 80,
   },
   iconContainer: {
     alignItems: 'center',
     justifyContent: 'center',
   },
   selectedTabIcon: {
-    rowGap: sv('spacing.xs'),
+    rowGap: sv('spacing.2xs'),
   },
   middleIconContainer: {
     backgroundColor: cv('azure.500'),
     borderRadius: 12,
-    padding: sv('spacing.m'),
+    padding: sv('spacing.sm'),
   },
   tabSelectedIndicator: {
     width: 15,

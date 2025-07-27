@@ -14,7 +14,7 @@ module.exports = {
   "android": {
     "adaptiveIcon": {
       "foregroundImage": "./assets/adaptive-icon.png",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0B6CFE"
     },
     "package": "com.samjoosten.tripo"
   },
@@ -26,7 +26,7 @@ module.exports = {
     [
       "expo-splash-screen",
       {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "#0B6CFE",
         "image": "./assets/splash-icon.png"
       }
     ],
