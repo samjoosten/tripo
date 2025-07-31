@@ -1,7 +1,7 @@
 interface Resources {
   "en": {
     "login": {
-      "title": "Login"
+      "title": "Every day a new"
     },
     "register": {
       "title": "Register"
@@ -9,7 +9,7 @@ interface Resources {
   },
   "nl": {
     "login": {
-      "title": "Inloggen"
+      "title": "Elke dag een nieuwe"
     },
     "register": {
       "title": "Aanmelden"

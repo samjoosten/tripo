@@ -12,13 +12,24 @@ type Props = {
   type: keyof typeof styles;
   color?: ColorPaletteType;
   size?: SizingType;
+  fontFamily?: string;
 } & TextProps;
 
-export const ThemedText = ({ type, color, size, ...rest }: Props) => {
+export const ThemedText = ({ type, color, size, fontFamily, ...rest }: Props) => {
   const colorValue = color ? cv(color) : undefined;
   const sizeValue = size ? sv(size) : undefined;
 
-  return <Text style={[styles[type], color && { color: colorValue }, size && { fontSize: sizeValue }]} {...rest} />;
+  return (
+    <Text
+      style={[
+        styles[type],
+        color && { color: colorValue },
+        size && { fontSize: sizeValue },
+        fontFamily && { fontFamily },
+      ]}
+      {...rest}
+    />
+  );
 };
 
 type AnimatedProps = {
