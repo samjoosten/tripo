@@ -1,21 +1,57 @@
-import { t } from 'i18next';
+import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet } from 'react-native';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslation } from 'react-i18next';
 
 import { sv } from 'shared/lib/theme';
-import { FilledButton } from 'shared/ui/FilledButton';
-import { RoundedView } from 'shared/ui/RoundedView/RoundedView';
 import { ScreenContent } from 'shared/ui/ScreenContent';
-import { ThemedText } from 'shared/ui/ThemedText';
+import { Form } from 'shared/ui/Form';
+import { FormInput } from 'shared/ui/FormInput';
+import { FilledButton } from 'shared/ui/FilledButton';
+
+import type { LoginSchema } from '../model/loginSchema';
+import { loginSchema } from '../model/loginSchema';
+
+import { LoginHeader } from './LoginHeader';
 
 export const LoginScreen = () => {
+  const { t } = useTranslation();
+  const {
+    control,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmitLogin = (data: LoginSchema) => {
+    console.log('Form submitted with data:', data);
+  };
+
+  const onError = (error: any) => {
+    console.error('Form submission error:', error);
+  };
+
   return (
     <ScreenContent style={styles.container}>
-      <ThemedText type='title'>
-        {t('login.title')}{' '}
-        <ThemedText type='title' fontFamily='ArchitectsDaughter-Regular' color='azure.500'>
-          challenge
-        </ThemedText>
-      </ThemedText>
+      <LoginHeader />
+      <Form>
+        <Controller
+          control={control}
+          name='email'
+          render={({ field: { onChange, value } }) => (
+            <FormInput label={t('login.labels.email')} value={value} onChangeText={onChange} />
+          )}
+        />
+        <Controller
+          control={control}
+          name='password'
+          render={({ field: { onChange, value } }) => (
+            <FormInput label={t('login.labels.password')} value={value} secureTextEntry onChangeText={onChange} />
+          )}
+        />
+        <FilledButton text={t('login.buttons.login')} onPress={handleSubmit(onSubmitLogin, onError)} />
+      </Form>
     </ScreenContent>
   );
 };

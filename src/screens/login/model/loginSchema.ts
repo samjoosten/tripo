@@ -1,9 +1,11 @@
 import * as z from 'zod';
 
+import { FormRules } from 'shared/lib/formValidation';
+
 export const loginSchema = z
   .object({
     email: z.email(),
-    password: z.string().min(6).max(100),
+    password: z.string().min(6, FormRules.MIN_LENGTH).max(100, FormRules.MAX_LENGTH),
   })
   .required();
 

@@ -1,6 +1,17 @@
 {
+  "common": {
+    "isRequired": "is verplicht"
+  },
   "login": {
-    "title": "Elke dag een nieuwe"
+    "title": "Elke dag een nieuwe",
+    "labels": {
+      "email": "Email",
+      "password": "Wachtwoord"
+    },
+    "buttons": {
+      "login": "Inloggen",
+      "register": "Nog geen account? Meld je aan"
+    }
   },
   "register": {
     "title": "Aanmelden"

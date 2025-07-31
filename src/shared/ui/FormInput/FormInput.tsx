@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import type { NativeSyntheticEvent, TextInputFocusEventData, TextInputProps } from 'react-native';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
-import { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, { LinearTransition, useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { cv, sv } from 'shared/lib/theme';
 
@@ -18,7 +18,7 @@ type Props = {
 } & TextInputProps;
 
 export const FormInput = ({
-  showFocus,
+  showFocus = true,
   label,
   error,
   trailingIcon,
@@ -56,7 +56,7 @@ export const FormInput = ({
   });
 
   return (
-    <>
+    <Animated.View layout={LinearTransition} style={styles.container}>
       {!!label && (
         <AnimatedThemedText type='secondary' color={color}>
           {label}
@@ -85,11 +85,15 @@ export const FormInput = ({
           </ThemedText>
         </View>
       )}
-    </>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 2,
+    width: '100%',
+  },
   inputContainer: {
     borderRadius: 12,
     borderColor: cv('powderBlue.200'),

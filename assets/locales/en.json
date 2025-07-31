@@ -1,6 +1,17 @@
 {
+  "common": {
+    "isRequired": "is required"
+  },
   "login": {
-    "title": "Every day a new"
+    "title": "Every day a new",
+    "labels": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "buttons": {
+      "login": "Sign in",
+      "register": "Don't have an account? Sign up"
+    }
   },
   "register": {
     "title": "Register"
