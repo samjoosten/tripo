@@ -25,6 +25,7 @@ export const FormInput = ({
   onFocus,
   onBlur,
   onTrailingIconPress,
+  style,
   ...rest
 }: Props) => {
   const color = useSharedValue(cv('powderBlue.200'));
@@ -67,7 +68,7 @@ export const FormInput = ({
           cursorColor={cv('azure.500')}
           selectionColor={cv('azure.500')}
           placeholderTextColor={cv('powderBlue.200')}
-          style={styles.input}
+          style={[styles.input, style]}
           onFocus={handleFocus}
           onBlur={handleBlur}
           {...rest}

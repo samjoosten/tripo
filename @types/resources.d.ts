@@ -1,7 +1,14 @@
 interface Resources {
   "en": {
-    "common": {
-      "isRequired": "is required"
+    "form": {
+      "validation": {
+        "required": "{{field}} is required",
+        "email": "{{field}} is not a valid email address",
+        "minLength": "Minimum {{min}} characters required",
+        "maxLength": "Maximum {{max}} characters allowed",
+        "passwordStrength": "Password must be at least 8 characters long, with at least one uppercase letter, one number, and one special character",
+        "default": "{{field}} is invalid"
+      }
     },
     "login": {
       "title": "Every day a new",
@@ -19,8 +26,15 @@ interface Resources {
     }
   },
   "nl": {
-    "common": {
-      "isRequired": "is verplicht"
+    "form": {
+      "validation": {
+        "required": "{{field}} is verplicht",
+        "email": "{{field}} is geen geldig e-mailadres",
+        "minLength": "Minimaal {{min}} karakters vereist",
+        "maxLength": "Maximaal {{max}} karakters toegestaan",
+        "passwordStrength": "Wachtwoord moet minimaal 8 tekens bevatten, met ten minste één hoofdletter, één cijfer en één speciaal teken",
+        "default": "{{field}} is ongeldig"
+      }
     },
     "login": {
       "title": "Elke dag een nieuwe",

@@ -2,6 +2,8 @@ import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet } from 'react-native';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { ViewIcon, ViewOffIcon } from '@hugeicons-pro/core-stroke-rounded';
 
 import { sv } from 'shared/lib/theme';
 import { ScreenContent } from 'shared/ui/ScreenContent';
@@ -9,27 +11,26 @@ import { Form } from 'shared/ui/Form';
 import { FormInput } from 'shared/ui/FormInput';
 import { FilledButton } from 'shared/ui/FilledButton';
 
-import type { LoginSchema } from '../model/loginSchema';
-import { loginSchema } from '../model/loginSchema';
+import type { LoginSchema } from '../model/useLoginSchema';
+import { useLoginSchema } from '../model/useLoginSchema';
 
 import { LoginHeader } from './LoginHeader';
 
 export const LoginScreen = () => {
   const { t } = useTranslation();
-  const {
-    control,
-    handleSubmit,
-    // formState: { errors },
-  } = useForm({
+  const loginSchema = useLoginSchema();
+  const { control, handleSubmit } = useForm({
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmitLogin = (data: LoginSchema) => {
-    console.log('Form submitted with data:', data);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible((prev) => !prev);
   };
 
-  const onError = (error: any) => {
-    console.error('Form submission error:', error);
+  const onSubmitLogin = (data: LoginSchema) => {
+    console.log('Form submitted with data:', data);
   };
 
   return (
@@ -39,18 +40,33 @@ export const LoginScreen = () => {
         <Controller
           control={control}
           name='email'
-          render={({ field: { onChange, value } }) => (
-            <FormInput label={t('login.labels.email')} value={value} onChangeText={onChange} />
+          render={({ field: { onChange, value }, formState: { errors } }) => (
+            <FormInput
+              label={t('login.labels.email')}
+              value={value}
+              keyboardType='email-address'
+              onChangeText={onChange}
+              error={errors.email?.message}
+            />
           )}
         />
         <Controller
           control={control}
           name='password'
-          render={({ field: { onChange, value } }) => (
-            <FormInput label={t('login.labels.password')} value={value} secureTextEntry onChangeText={onChange} />
+          render={({ field: { onChange, value }, formState: { errors } }) => (
+            <FormInput
+              label={t('login.labels.password')}
+              value={value}
+              secureTextEntry={!passwordVisible}
+              style={!passwordVisible && styles.passwordSecure}
+              onChangeText={onChange}
+              error={errors.password?.message}
+              trailingIcon={passwordVisible ? ViewOffIcon : ViewIcon}
+              onTrailingIconPress={togglePasswordVisibility}
+            />
           )}
         />
-        <FilledButton text={t('login.buttons.login')} onPress={handleSubmit(onSubmitLogin, onError)} />
+        <FilledButton text={t('login.buttons.login')} onPress={handleSubmit(onSubmitLogin)} />
       </Form>
     </ScreenContent>
   );
@@ -62,5 +78,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     rowGap: sv('spacing.m'),
+  },
+  passwordSecure: {
+    fontFamily: '',
+    fontSize: sv('text.sm'),
   },
 });

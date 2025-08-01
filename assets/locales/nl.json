@@ -1,6 +1,13 @@
 {
-  "common": {
-    "isRequired": "is verplicht"
+  "form": {
+    "validation": {
+      "required": "{{field}} is verplicht",
+      "email": "{{field}} is geen geldig e-mailadres",
+      "minLength": "{{field}} moet minimaal {{min}} karakters bevatten",
+      "maxLength": "{{field}} mag maximaal {{max}} karakters bevatten",
+      "passwordStrength": "{{field}} moet minimaal 8 tekens bevatten, met ten minste één hoofdletter, één cijfer en één speciaal teken",
+      "default": "{{field}} is ongeldig"
+    }
   },
   "login": {
     "title": "Elke dag een nieuwe",

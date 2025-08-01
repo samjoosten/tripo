@@ -1,6 +1,13 @@
 {
-  "common": {
-    "isRequired": "is required"
+  "form": {
+    "validation": {
+      "required": "{{field}} is required",
+      "email": "{{field}} is not a valid email address",
+      "minLength": "{{field}} must be at least {{min}} characters long",
+      "maxLength": "{{field}} cannot be longer than {{max}} characters",
+      "passwordStrength": "Password must be at least 8 characters long, with at least one uppercase letter, one number, and one special character",
+      "default": "{{field}} is invalid"
+    }
   },
   "login": {
     "title": "Every day a new",
