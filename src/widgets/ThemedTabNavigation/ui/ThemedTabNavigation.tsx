@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { cv, sv } from 'shared/lib/theme';
-import { RoundedView } from 'shared/ui/RoundedView/RoundedView';
+import { RoundedView } from 'shared/ui/RoundedView';
 
 import { TabIcon } from './TabIcon';
 

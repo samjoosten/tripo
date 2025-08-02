@@ -7,7 +7,7 @@ import { I18nextProvider } from 'react-i18next';
 import Navigation from 'app/navigation/Navigation';
 import { InitProvider } from 'app/providers/InitProvider';
 import { useCacheAssets } from 'app/providers/InitProvider/useCacheAssets';
-import i18n from 'shared/config/i18n/i18n';
+import { i18n } from 'shared/config';
 
 // Keep the splash screen visible while we fetch resources
 void SplashScreen.preventAutoHideAsync();

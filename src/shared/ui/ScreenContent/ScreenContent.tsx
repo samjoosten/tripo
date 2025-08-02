@@ -1,5 +1,6 @@
 import type { ViewProps } from 'react-native';
 import { StyleSheet, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { cv, sv } from 'shared/lib/theme';
@@ -53,6 +54,8 @@ export const ScreenContent = ({
     </View>
   );
 };
+
+export const AnimatedScreenContent = Animated.createAnimatedComponent(ScreenContent);
 
 const styles = StyleSheet.create({
   container: {

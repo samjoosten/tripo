@@ -10,14 +10,14 @@
     }
   },
   "login": {
-    "title": "Elke dag een nieuwe",
+    "title": "Elke week een nieuwe",
     "labels": {
       "email": "Email",
       "password": "Wachtwoord"
     },
     "buttons": {
       "login": "Inloggen",
-      "register": "Nog geen account? Meld je aan"
+      "register": "Nog geen account? <0>Meld je aan</0>"
     }
   },
   "register": {

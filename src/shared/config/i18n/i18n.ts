@@ -7,8 +7,8 @@ import { getLocalize } from 'shared/lib/intl/getLocalize';
 import en from '../../../../assets/locales/en.json';
 import nl from '../../../../assets/locales/nl.json';
 
-import type { LanguageType } from './types/localize';
-import { LanguageList } from './types/localize';
+import type { LanguageType } from './localize';
+import { LanguageList } from './localize';
 
 const languageDetector: LanguageDetectorAsyncModule = {
   type: 'languageDetector',

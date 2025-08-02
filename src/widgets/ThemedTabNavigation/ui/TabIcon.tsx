@@ -20,10 +20,10 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+import { ThemedIcon, type IconSvgObject } from 'shared/ui/ThemedIcon';
 import { cv, sv } from 'shared/lib/theme';
 import { AppTabNavigation } from 'shared/routes';
-import { ThemedIcon, type IconSvgObject } from 'shared/ui/ThemedIcon';
-import { RoundedView } from 'shared/ui/RoundedView/RoundedView';
+import { RoundedView } from 'shared/ui/RoundedView';
 
 type Props = {
   route: NavigationRoute<ParamListBase, string>;

@@ -1,1 +1,1 @@
-export { ScreenContent } from './ScreenContent';
+export { ScreenContent, AnimatedScreenContent } from './ScreenContent';

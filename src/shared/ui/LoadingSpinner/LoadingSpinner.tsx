@@ -10,22 +10,24 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+import type { ColorPaletteType, SizingType } from 'shared/lib/theme';
 import { cv, sv } from 'shared/lib/theme';
 
 type Props = {
-  color?: string;
-  size?: number;
+  color?: ColorPaletteType;
+  size?: SizingType;
 };
 
-export const LoadingSpinner = ({ color, size = sv('spacing.m') }: Props) => {
-  const STROKE_WIDTH = size / 10;
-  const CIRCLE_RADIUS = (size - STROKE_WIDTH) / 2;
+export const LoadingSpinner = ({ color = 'white', size = 'spacing.m' }: Props) => {
+  const sizeValue = sv(size);
+  const STROKE_WIDTH = sizeValue / 10;
+  const CIRCLE_RADIUS = (sizeValue - STROKE_WIDTH) / 2;
 
   const progress = useSharedValue(0);
 
   const circlePath = useMemo(() => {
     const path = Skia.Path.Make();
-    path.addCircle(size / 2, size / 2, CIRCLE_RADIUS);
+    path.addCircle(sizeValue / 2, sizeValue / 2, CIRCLE_RADIUS);
     return path;
   }, []);
 
@@ -52,10 +54,10 @@ export const LoadingSpinner = ({ color, size = sv('spacing.m') }: Props) => {
 
   return (
     <Animated.View style={aStyle}>
-      <Canvas style={{ width: size, height: size }}>
+      <Canvas style={{ width: sizeValue, height: sizeValue }}>
         <Path
           path={circlePath}
-          color={color || cv('white')}
+          color={cv(color)}
           style={'stroke'}
           strokeWidth={STROKE_WIDTH}
           strokeCap={'round'}
