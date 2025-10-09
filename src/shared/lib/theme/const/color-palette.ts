@@ -1,6 +1,7 @@
 export const COLOR_PALETTE = {
   white: '#ffffff',
   scaffold: '#F8FBFE',
+  scaffoldDark: '#000814',
   gray: {
     100: '#f5f5f5',
     200: '#d7d6d6',
@@ -10,7 +11,7 @@ export const COLOR_PALETTE = {
     600: '#484747',
     700: '#2e2d2d',
     800: '#1f1e1e',
-    900: '#0A0A0A'
+    900: '#0A0A0A',
   },
   azure: {
     100: '#ebf3ff',
@@ -21,7 +22,7 @@ export const COLOR_PALETTE = {
     600: '#0152cb',
     700: '#01398e',
     800: '#002151',
-    900: '#000814'
+    900: '#000814',
   },
   powderBlue: {
     100: '#d7deea',
@@ -32,7 +33,7 @@ export const COLOR_PALETTE = {
     600: '#475e85',
     700: '#32425d',
     800: '#1d2635',
-    900: '#151C28'
+    900: '#151C28',
   },
   red: {
     100: '#fcecec',
@@ -43,7 +44,7 @@ export const COLOR_PALETTE = {
     600: '#bc1010',
     700: '#830b0b',
     800: '#4b0707',
-    900: '#260303'
+    900: '#260303',
   },
   green: {
     100: '#eefcf3',
@@ -54,6 +55,6 @@ export const COLOR_PALETTE = {
     600: '#20ac53',
     700: '#16793a',
     800: '#0d4521',
-    900: '#062211'
-  }
+    900: '#062211',
+  },
 };

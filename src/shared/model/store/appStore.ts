@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { Appearance } from 'react-native';
 
 import { storage, zustandStorage } from './storage';
 
@@ -13,6 +14,8 @@ type AppState = {
   setRefreshToken: (token: string | null) => void;
   addTokens: (accessToken: string, refreshToken: string) => void;
   removeTokens: () => void;
+  theme: 'light' | 'dark';
+  setTheme: (theme: 'light' | 'dark') => void;
 };
 
 export const useAppStore = create<AppState>()(
@@ -32,6 +35,8 @@ export const useAppStore = create<AppState>()(
         storage.delete(ACCESS_TOKEN_STORAGE_KEY);
         storage.delete(REFRESH_TOKEN_STORAGE_KEY);
       },
+      theme: Appearance.getColorScheme() ?? 'light',
+      setTheme: (theme) => set({ theme }),
     }),
     {
       name: 'app-storage',

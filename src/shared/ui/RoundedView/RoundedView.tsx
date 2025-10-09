@@ -190,7 +190,7 @@ export const RoundedView = ({
               {!!gradientColors && (
                 <LinearGradient colors={gradientColors} start={vec(0, 0)} end={{ x: width, y: height }} />
               )}
-              {!!borderWidth && <Paint color={borderColor} stroke-width={borderWidth} style='stroke' />}
+              {!!borderWidth && <Paint color={borderColor} strokeWidth={borderWidth} style='stroke' />}
             </Path>
             {!!withShadow && (
               <Shadow dx={shadowOffset.x} dy={shadowOffset.y} blur={shadowBlur} color={shadowColor} inner={false} />

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import type { NativeSyntheticEvent, TextInputFocusEventData, TextInputProps } from 'react-native';
+import type { FocusEvent, TextInputProps, BlurEvent } from 'react-native';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import Animated, { LinearTransition, useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
 
-import { cv, sv } from 'shared/lib/theme';
+import { cv, sv, useColor } from 'shared/lib/theme';
 
 import { RoundedView } from '../RoundedView/RoundedView';
 import { AnimatedIcon, type IconSvgObject } from '../ThemedIcon';
@@ -15,6 +15,8 @@ type Props = {
   label?: string;
   trailingIcon?: IconSvgObject;
   onTrailingIconPress?: () => void;
+  onFocus?: (e: FocusEvent) => void;
+  onBlur?: (e: BlurEvent) => void;
 } & TextInputProps;
 
 export const FormInput = ({
@@ -28,42 +30,46 @@ export const FormInput = ({
   style,
   ...rest
 }: Props) => {
-  const color = useSharedValue(cv('powderBlue.200'));
+  const defaultColor = useColor('powderBlue.200');
+  const focusedColor = useColor('azure.400');
+  const errorColor = useColor('red.400');
+
+  const colorSv = useSharedValue(defaultColor);
 
   useEffect(() => {
     if (error) {
-      color.value = withTiming(cv('red.400'), { duration: 200 });
+      colorSv.value = withTiming(errorColor, { duration: 200 });
     } else {
-      color.value = withTiming(cv('powderBlue.200'), { duration: 200 });
+      colorSv.value = withTiming(defaultColor, { duration: 200 });
     }
-  }, [error]);
+  }, [error, errorColor, defaultColor]);
 
-  const handleFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+  const handleFocus = (e: FocusEvent) => {
     if (!showFocus) return;
 
-    color.value = withTiming(cv('azure.400'), { duration: 200 });
+    colorSv.value = withTiming(focusedColor, { duration: 200 });
     onFocus?.(e);
   };
 
-  const handleBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+  const handleBlur = (e: BlurEvent) => {
     if (!showFocus) return;
 
-    color.value = withTiming(cv('powderBlue.200'), { duration: 200 });
+    colorSv.value = withTiming(cv('powderBlue.200'), { duration: 200 });
     onBlur?.(e);
   };
 
   const animatedProps = useAnimatedProps(() => {
-    return { color: color.value };
+    return { color: colorSv.value };
   });
 
   return (
     <Animated.View layout={LinearTransition} style={styles.container}>
       {!!label && (
-        <AnimatedThemedText type='secondary' color={color}>
+        <AnimatedThemedText type='secondary' color={colorSv}>
           {label}
         </AnimatedThemedText>
       )}
-      <RoundedView style={[styles.inputContainer]} borderWidth={2} borderColor={color}>
+      <RoundedView style={[styles.inputContainer]} borderWidth={2} borderColor={colorSv}>
         <TextInput
           cursorColor={cv('azure.500')}
           selectionColor={cv('azure.500')}

@@ -8,6 +8,7 @@ import Navigation from 'app/navigation/Navigation';
 import { InitProvider } from 'app/providers/InitProvider';
 import { useCacheAssets } from 'app/providers/InitProvider/useCacheAssets';
 import { i18n } from 'shared/config';
+import ThemeProvider from 'app/providers/ThemeProvider';
 
 // Keep the splash screen visible while we fetch resources
 void SplashScreen.preventAutoHideAsync();
@@ -29,7 +30,9 @@ const App = () => {
       <GestureHandlerRootView>
         <SafeAreaProvider>
           <InitProvider>
-            <Navigation />
+            <ThemeProvider>
+              <Navigation />
+            </ThemeProvider>
           </InitProvider>
         </SafeAreaProvider>
       </GestureHandlerRootView>
