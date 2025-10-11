@@ -1,6 +1,6 @@
 import { useAppStore } from 'shared/model';
 
-import { COLOR_PALETTE } from '../const/color-palette';
+import { COLOR_PALETTE } from '../const/colorPalette';
 import type { ColorPaletteType } from '../types/palette';
 
 export const colorValue = (color: ColorPaletteType) => {

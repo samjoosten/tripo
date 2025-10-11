@@ -3,8 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { cv, sv } from 'shared/lib/theme';
-import { useAppStore } from 'shared/model';
+import { cv, sv, useStyle } from 'shared/lib/theme';
 
 type Props = {
   withTopSafeArea?: boolean;
@@ -21,8 +20,7 @@ export const ScreenContent = ({
   ...rest
 }: Props) => {
   const { top, bottom } = useSafeAreaInsets();
-  const theme = useAppStore((state) => state.theme);
-  const containerStyle = theme === 'dark' ? styles.darkContainer : styles.container;
+  const containerStyle = useStyle(styles.container, styles.darkContainer);
 
   const getTopPadding = () => {
     if (withTopSafeArea) {

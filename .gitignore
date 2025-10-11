@@ -44,3 +44,4 @@ android/
 storybook-static
 
 .npmrc
+.env
