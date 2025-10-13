@@ -3,6 +3,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Constants from 'expo-constants';
 import { I18nextProvider } from 'react-i18next';
+import { ClerkProvider, useAuth } from '@clerk/clerk-react';
+import { ConvexProviderWithClerk } from 'convex/react-clerk';
+import { ConvexReactClient } from 'convex/react';
 
 import Navigation from 'app/navigation/Navigation';
 import { InitProvider } from 'app/providers/InitProvider';
@@ -22,20 +25,26 @@ if (Constants.expoConfig?.extra?.storybookEnabled === 'true') {
   void SplashScreen.hideAsync();
 }
 
+const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL as string);
+
 const App = () => {
   useCacheAssets();
 
   return (
     <I18nextProvider i18n={i18n}>
-      <GestureHandlerRootView>
-        <SafeAreaProvider>
-          <InitProvider>
-            <ThemeProvider>
-              <Navigation />
-            </ThemeProvider>
-          </InitProvider>
-        </SafeAreaProvider>
-      </GestureHandlerRootView>
+      <ClerkProvider publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY as string}>
+        <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
+          <GestureHandlerRootView>
+            <SafeAreaProvider>
+              <InitProvider>
+                <ThemeProvider>
+                  <Navigation />
+                </ThemeProvider>
+              </InitProvider>
+            </SafeAreaProvider>
+          </GestureHandlerRootView>
+        </ConvexProviderWithClerk>
+      </ClerkProvider>
     </I18nextProvider>
   );
 };
