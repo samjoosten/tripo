@@ -18,6 +18,12 @@ export default defineSchema({
     title: v.string(),
     description: v.string(),
   }),
+  challengeHistory: defineTable({
+    groupId: v.id('groups'),
+    challengeId: v.id('challenges'),
+    startDate: v.number(),
+    endDate: v.number(),
+  }).index('by_group', ['groupId']),
   posts: defineTable({
     source: v.string(),
     type: v.union(v.literal('image'), v.literal('video')),

@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SplashScreen from 'expo-splash-screen';
 import { useTranslation } from 'react-i18next';
+import { useConvexAuth } from 'convex/react';
 
 import { LoginScreen, RegistrationScreen } from 'screens';
 import type { NavigationStackLists } from 'shared/routes';
@@ -14,6 +15,7 @@ export const Stack = createNativeStackNavigator<NavigationStackLists>();
 
 const Navigation = () => {
   const { t } = useTranslation();
+  const { isAuthenticated } = useConvexAuth();
 
   return (
     <NavigationContainer onReady={() => SplashScreen.hideAsync()}>
@@ -22,13 +24,20 @@ const Navigation = () => {
         screenOptions={{
           headerTitleStyle: { fontFamily: 'Gilroy-SemiBold', color: cv('gray.900') },
         }}>
-        <Stack.Screen name={AppNavigation.LOGIN} component={LoginScreen} options={{ headerShown: false }} />
-        <Stack.Screen
-          name={AppNavigation.REGISTER}
-          component={RegistrationScreen}
-          options={{ title: t('register.title') }}
-        />
-        <Stack.Screen name={AppNavigation.MAIN} options={{ headerShown: false }} component={TabNavigation} />
+        {!isAuthenticated ? (
+          <>
+            <Stack.Screen name={AppNavigation.LOGIN} component={LoginScreen} options={{ headerShown: false }} />
+            <Stack.Screen
+              name={AppNavigation.REGISTER}
+              component={RegistrationScreen}
+              options={{ title: t('register.title') }}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name={AppNavigation.MAIN} options={{ headerShown: false }} component={TabNavigation} />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
