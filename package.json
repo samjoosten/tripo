@@ -90,6 +90,7 @@
     "react-native-gesture-handler": "~2.28.0",
     "react-native-safe-area-context": "~5.6.0",
     "react-native-svg": "15.12.1",
+    "react-native-svg-transformer": "^1.5.1",
     "steiger": "^0.5.7",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.46.0"

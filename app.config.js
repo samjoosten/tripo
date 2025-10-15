@@ -1,22 +1,22 @@
 module.exports = {
-  "name": "Tripo",
-  "slug": "tripo",
+  "name": process.env.EXPO_PUBLIC_PROFILE === "production" ? "Tripo" : "Tripo Dev",
+  "slug": process.env.EXPO_PUBLIC_PROFILE === "production" ? "tripo" : "tripo-dev",
   "version": "1.0.0",
   "orientation": "portrait",
-  "icon": "./assets/icon.png",
+  "icon": process.env.EXPO_PUBLIC_PROFILE === "production" ? "./assets/icon.png" : "./assets/icon-dev.png",
   "userInterfaceStyle": "automatic",
   "newArchEnabled": true,
-  "scheme": "tripo",
+  "scheme": process.env.EXPO_PUBLIC_PROFILE === "production" ? "tripo" : "tripo-dev",
   "ios": {
     "supportsTablet": true,
-    "bundleIdentifier": "com.samjoosten.tripo"
+    "bundleIdentifier": process.env.EXPO_PUBLIC_PROFILE === "production" ? "com.samjoosten.tripo" : "com.samjoosten.tripo.dev"
   },
   "android": {
     "adaptiveIcon": {
-      "foregroundImage": "./assets/adaptive-icon.png",
+      "foregroundImage": process.env.EXPO_PUBLIC_PROFILE === "production" ? "./assets/adaptive-icon.png" : "./assets/adaptive-icon-dev.png",
       "backgroundColor": "#0B6CFE"
     },
-    "package": "com.samjoosten.tripo"
+    "package": process.env.EXPO_PUBLIC_PROFILE === "production" ? "com.samjoosten.tripo" : "com.samjoosten.tripo.dev"
   },
   "extra": {
     "storybookEnabled": process.env.STORYBOOK_ENABLED,

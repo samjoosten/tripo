@@ -12,6 +12,7 @@ import { Form } from 'shared/ui/Form';
 import { FormInput } from 'shared/ui/FormInput';
 import { AnimatedScreenContent } from 'shared/ui/ScreenContent';
 import { ThemedText } from 'shared/ui/ThemedText';
+import AuthByGoogle from 'features/auth-by-google';
 
 import type { LoginSchema } from '../model/useLoginSchema';
 import { useLoginSchema } from '../model/useLoginSchema';
@@ -69,6 +70,7 @@ export const LoginScreen = () => {
           )}
         />
         <FilledButton text={t('login.buttons.login')} onPress={handleSubmit(onSubmitLogin)} />
+        <AuthByGoogle />
       </Form>
       <Pressable>
         <ThemedText type='body'>
