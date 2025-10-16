@@ -30,9 +30,9 @@ export const FormInput = ({
   style,
   ...rest
 }: Props) => {
-  const defaultColor = useColor('powderBlue.200');
-  const focusedColor = useColor('azure.400');
-  const errorColor = useColor('red.400');
+  const defaultColor = useColor('powderBlue.200')!;
+  const focusedColor = useColor('azure.400')!;
+  const errorColor = useColor('red.400')!;
 
   const colorSv = useSharedValue(defaultColor);
 

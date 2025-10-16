@@ -15,7 +15,9 @@ export const colorValue = (color: ColorPaletteType) => {
   }
 };
 
-export const useColor = (lightColor: ColorPaletteType, darkColor?: ColorPaletteType) => {
+export const useColor = (lightColor?: ColorPaletteType, darkColor?: ColorPaletteType) => {
   const theme = useAppStore((state) => state.theme);
+  if (!lightColor) return undefined;
+
   return theme === 'dark' ? colorValue(darkColor || lightColor) : colorValue(lightColor);
 };

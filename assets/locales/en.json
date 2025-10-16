@@ -17,7 +17,9 @@
     },
     "buttons": {
       "login": "Sign in",
-      "register": "Don't have an account? <0>Sign up</0>"
+      "register": "Don't have an account? <0>Sign up</0>",
+      "google": "Continue with Google",
+      "apple": "Continue with Apple"
     }
   },
   "register": {

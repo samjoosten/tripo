@@ -15,7 +15,7 @@ type Props = {
   fontFamily?: string;
 } & TextProps;
 
-export const ThemedText = ({ type, color, size, fontFamily, ...rest }: Props) => {
+export const ThemedText = ({ type, color, size, fontFamily, style, ...rest }: Props) => {
   const colorValue = color ? cv(color) : undefined;
   const sizeValue = size ? sv(size) : undefined;
 
@@ -26,6 +26,7 @@ export const ThemedText = ({ type, color, size, fontFamily, ...rest }: Props) =>
         color && { color: colorValue },
         size && { fontSize: sizeValue },
         fontFamily && { fontFamily },
+        style,
       ]}
       {...rest}
     />

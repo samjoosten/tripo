@@ -3,6 +3,7 @@ export const COLOR_PALETTE = {
   scaffold: '#F8FBFE',
   scaffoldDark: '#000814',
   gray: {
+    50: '#fafafa',
     100: '#f5f5f5',
     200: '#d7d6d6',
     300: '#aeadad',
@@ -14,6 +15,7 @@ export const COLOR_PALETTE = {
     900: '#0A0A0A',
   },
   azure: {
+    50: '#f0f5ff',
     100: '#ebf3ff',
     200: '#aeceff',
     300: '#71a9fe',
@@ -25,6 +27,7 @@ export const COLOR_PALETTE = {
     900: '#000814',
   },
   powderBlue: {
+    50: '#E4E9F1',
     100: '#d7deea',
     200: '#adbbd3',
     300: '#889cbf',
@@ -36,6 +39,7 @@ export const COLOR_PALETTE = {
     900: '#151C28',
   },
   red: {
+    50: '#fcecec',
     100: '#fcecec',
     200: '#f8b4b4',
     300: '#f47c7c',
@@ -47,6 +51,7 @@ export const COLOR_PALETTE = {
     900: '#260303',
   },
   green: {
+    50: '#f0fdf4',
     100: '#eefcf3',
     200: '#baf2cf',
     300: '#86e9aa',

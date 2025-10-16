@@ -17,7 +17,9 @@
     },
     "buttons": {
       "login": "Inloggen",
-      "register": "Nog geen account? <0>Meld je aan</0>"
+      "register": "Nog geen account? <0>Meld je aan</0>",
+      "google": "Doorgaan met Google",
+      "apple": "Doorgaan met Apple"
     }
   },
   "register": {

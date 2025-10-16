@@ -11,14 +11,16 @@ interface Resources {
       }
     },
     "login": {
-      "title": "Every day a new",
+      "title": "Every week a new",
       "labels": {
         "email": "Email",
         "password": "Password"
       },
       "buttons": {
         "login": "Sign in",
-        "register": "Don't have an account? <0>Sign up</0>"
+        "register": "Don't have an account? <0>Sign up</0>",
+        "google": "Continue with Google",
+        "apple": "Continue with Apple"
       }
     },
     "register": {
@@ -37,14 +39,16 @@ interface Resources {
       }
     },
     "login": {
-      "title": "Elke dag een nieuwe",
+      "title": "Elke week een nieuwe",
       "labels": {
         "email": "Email",
         "password": "Wachtwoord"
       },
       "buttons": {
         "login": "Inloggen",
-        "register": "Nog geen account? <0>Meld je aan</0>"
+        "register": "Nog geen account? <0>Meld je aan</0>",
+        "google": "Doorgaan met Google",
+        "apple": "Doorgaan met Apple"
       }
     },
     "register": {

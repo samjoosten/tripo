@@ -9,7 +9,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { cv } from 'shared/lib/theme';
+import type { ColorPaletteType } from 'shared/lib/theme';
+import { cv, useColor } from 'shared/lib/theme';
 import { LoadingSpinner } from 'shared/ui/LoadingSpinner';
 import { ThemedIcon, type IconSvgObject } from 'shared/ui/ThemedIcon';
 import { ThemedText } from 'shared/ui/ThemedText';
@@ -22,17 +23,43 @@ const ACTIVE_COLORS = [cv('azure.400'), cv('azure.600')];
 const DISABLED_COLOR = cv('gray.300');
 
 type Props = {
-  text: string;
+  text?: string;
   disabled?: boolean;
   loading?: boolean;
   autowidth?: boolean;
   leadingIcon?: IconSvgObject;
   trailingIcon?: IconSvgObject;
+  color?: ColorPaletteType;
+  lightColor?: ColorPaletteType;
+  darkColor?: ColorPaletteType;
+  children?: React.ReactNode;
+  borderWidth?: number;
+  borderColor?: ColorPaletteType;
+  lightBorderColor?: ColorPaletteType;
+  darkBorderColor?: ColorPaletteType;
   onPress?: () => void;
 };
 
-export const FilledButton = ({ text, disabled, loading, autowidth, leadingIcon, trailingIcon, onPress }: Props) => {
+export const FilledButton = ({
+  text,
+  disabled,
+  loading,
+  autowidth,
+  leadingIcon,
+  trailingIcon,
+  color,
+  lightColor,
+  darkColor,
+  borderWidth,
+  borderColor,
+  lightBorderColor,
+  darkBorderColor,
+  children,
+  onPress,
+}: Props) => {
   const isDisabled = disabled || loading;
+  const colorValue = useColor(color ?? lightColor, darkColor);
+  const borderColorValue = useColor(borderColor ?? lightBorderColor, darkBorderColor);
   const firstColor = useSharedValue(ACTIVE_COLORS[0]);
   const secondColor = useSharedValue(ACTIVE_COLORS[1]);
   const colors = useDerivedValue(() => [firstColor.value, secondColor.value]);
@@ -92,18 +119,26 @@ export const FilledButton = ({ text, disabled, loading, autowidth, leadingIcon, 
       onPressIn={onPressIn}
       onPressOut={onPressOut}
       disabled={isDisabled}
-      style={!autowidth ? { width: '100%' } : {}}>
-      <Animated.View style={[aButtonContainerStyle, !autowidth ? { width: '100%' } : {}]}>
-        <RoundedView style={styles.container} gradientColors={colors}>
+      style={[!autowidth ? { width: '100%' } : {}]}>
+      <Animated.View style={[aButtonContainerStyle, !autowidth ? { width: '100%', padding: 2 } : {}]}>
+        <RoundedView
+          style={[styles.container, colorValue && { backgroundColor: colorValue }]}
+          borderColor={borderColorValue ?? colorValue ?? firstColor}
+          borderWidth={borderWidth ?? 2}
+          gradientColors={colors}>
           {!!loading && (
             <Animated.View style={[aLoaderStyle, { position: 'absolute' }]}>
               <LoadingSpinner />
             </Animated.View>
           )}
           <Animated.View style={[aContentStyle, styles.content]}>
-            {!!leadingIcon && <ThemedIcon icon={leadingIcon} color={cv('white')} />}
-            <ThemedText type='button'>{text}</ThemedText>
-            {!!trailingIcon && <ThemedIcon icon={trailingIcon} color={cv('white')} />}
+            {children ?? (
+              <>
+                {!!leadingIcon && <ThemedIcon icon={leadingIcon} color={cv('white')} />}
+                <ThemedText type='button'>{text}</ThemedText>
+                {!!trailingIcon && <ThemedIcon icon={trailingIcon} color={cv('white')} />}
+              </>
+            )}
           </Animated.View>
         </RoundedView>
       </Animated.View>

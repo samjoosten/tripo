@@ -14,7 +14,6 @@ export const Form = ({ children, ...rest }: ViewProps) => {
 const styles = StyleSheet.create({
   container: {
     rowGap: sv('spacing.lg'),
-    alignItems: 'flex-start',
     width: '100%',
   },
 });

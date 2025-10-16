@@ -2,16 +2,18 @@ import { StyleSheet } from 'react-native';
 
 import { cv, sv } from 'shared/lib/theme';
 
+const BUTTON_HEIGHT = 50;
+
 export const styles = StyleSheet.create({
   container: {
     borderRadius: 12,
     paddingHorizontal: sv('spacing.lg'),
     paddingVertical: sv('spacing.m'),
     rowGap: sv('spacing.xs'),
-    overflow: 'hidden',
     justifyContent: 'center',
     backgroundColor: cv('azure.500'),
     alignItems: 'center',
+    height: BUTTON_HEIGHT,
   },
   canvas: {
     position: 'absolute',
