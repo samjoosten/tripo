@@ -9,7 +9,8 @@ module.exports = {
   "scheme": process.env.EXPO_PUBLIC_PROFILE === "production" ? "tripo" : "tripo-dev",
   "ios": {
     "supportsTablet": true,
-    "bundleIdentifier": process.env.EXPO_PUBLIC_PROFILE === "production" ? "com.samjoosten.tripo" : "com.samjoosten.tripo.dev"
+    "bundleIdentifier": process.env.EXPO_PUBLIC_PROFILE === "production" ? "com.samjoosten.tripo" : "com.samjoosten.tripo.dev",
+    "entitlements": ["com.apple.developer.applesignin"]
   },
   "android": {
     "adaptiveIcon": {
