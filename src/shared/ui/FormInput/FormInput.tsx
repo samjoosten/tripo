@@ -3,7 +3,7 @@ import type { FocusEvent, TextInputProps, BlurEvent } from 'react-native';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import Animated, { LinearTransition, useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
 
-import { cv, sv, useColor } from 'shared/lib/theme';
+import { cv, sv, useThemeColor } from 'shared/lib/theme';
 
 import { RoundedView } from '../RoundedView/RoundedView';
 import { AnimatedIcon, type IconSvgObject } from '../ThemedIcon';
@@ -30,9 +30,11 @@ export const FormInput = ({
   style,
   ...rest
 }: Props) => {
-  const defaultColor = useColor('powderBlue.200')!;
-  const focusedColor = useColor('azure.400')!;
-  const errorColor = useColor('red.400')!;
+  const backgroundColor = useThemeColor('input');
+  const defaultColor = useThemeColor('input.border');
+  const focusedColor = useThemeColor('input.border:focused');
+  const placeholderTextColor = useThemeColor('input.placeholder');
+  const errorColor = useThemeColor('input.border:error');
 
   const colorSv = useSharedValue(defaultColor);
 
@@ -54,7 +56,7 @@ export const FormInput = ({
   const handleBlur = (e: BlurEvent) => {
     if (!showFocus) return;
 
-    colorSv.value = withTiming(cv('powderBlue.200'), { duration: 200 });
+    colorSv.value = withTiming(defaultColor, { duration: 200 });
     onBlur?.(e);
   };
 
@@ -69,11 +71,11 @@ export const FormInput = ({
           {label}
         </AnimatedThemedText>
       )}
-      <RoundedView style={[styles.inputContainer]} borderWidth={2} borderColor={colorSv}>
+      <RoundedView style={[styles.inputContainer, { backgroundColor }]} borderWidth={2} borderColor={colorSv}>
         <TextInput
           cursorColor={cv('azure.500')}
           selectionColor={cv('azure.500')}
-          placeholderTextColor={cv('powderBlue.200')}
+          placeholderTextColor={placeholderTextColor}
           style={[styles.input, style]}
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -87,7 +89,7 @@ export const FormInput = ({
       </RoundedView>
       {!!error && (
         <View style={{ marginTop: sv('spacing.xs') }}>
-          <ThemedText type='secondary' color='red.400'>
+          <ThemedText type='secondary' lightColor='red.400' darkColor='red.400'>
             {error}
           </ThemedText>
         </View>
@@ -103,10 +105,8 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     borderRadius: 12,
-    borderColor: cv('powderBlue.200'),
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: cv('white'),
     columnGap: sv('spacing.xs'),
     marginTop: sv('spacing.xs'),
   },

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { cv, sv } from 'shared/lib/theme';
+import { sv } from 'shared/lib/theme';
 
 const BUTTON_HEIGHT = 50;
 
@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
     paddingVertical: sv('spacing.m'),
     rowGap: sv('spacing.xs'),
     justifyContent: 'center',
-    backgroundColor: cv('azure.500'),
     alignItems: 'center',
     height: BUTTON_HEIGHT,
   },

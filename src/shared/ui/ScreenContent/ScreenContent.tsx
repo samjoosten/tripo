@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { cv, sv, useStyle } from 'shared/lib/theme';
+import { sv, useThemeColor } from 'shared/lib/theme';
 
 type Props = {
   withTopSafeArea?: boolean;
@@ -20,7 +20,7 @@ export const ScreenContent = ({
   ...rest
 }: Props) => {
   const { top, bottom } = useSafeAreaInsets();
-  const containerStyle = useStyle(styles.container, styles.darkContainer);
+  const backgroundColor = useThemeColor('scaffold');
 
   const getTopPadding = () => {
     if (withTopSafeArea) {
@@ -46,7 +46,8 @@ export const ScreenContent = ({
   return (
     <View
       style={[
-        containerStyle,
+        styles.container,
+        { backgroundColor },
         { paddingTop: getTopPadding(), paddingBottom: getBottomPadding(), paddingHorizontal: getHorizontalPadding() },
         style,
       ]}
@@ -61,10 +62,5 @@ export const AnimatedScreenContent = Animated.createAnimatedComponent(ScreenCont
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: cv('scaffold'),
-  },
-  darkContainer: {
-    flex: 1,
-    backgroundColor: cv('scaffoldDark'),
   },
 });

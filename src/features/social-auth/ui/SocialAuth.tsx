@@ -15,12 +15,25 @@ const SocialAuth = () => {
   return (
     <Column spacing='spacing.xs'>
       {Platform.OS === 'ios' && (
-        <FilledButton color='gray.900' leadingIcon={AppleIcon} text={t('login.buttons.apple')} />
+        <FilledButton
+          borderWidth={2}
+          lightColor='gray.900'
+          lightBorderColor='gray.900'
+          darkColor='gray.900'
+          darkBorderColor='gray.700'
+          leadingIcon={AppleIcon}
+          text={t('login.buttons.apple')}
+        />
       )}
-      <FilledButton borderColor='powderBlue.300' color='white' borderWidth={2}>
+      <FilledButton
+        lightBorderColor='powderBlue.300'
+        lightColor='white'
+        darkColor='gray.900'
+        darkBorderColor='gray.700'
+        borderWidth={2}>
         <Row>
           <GoogleLogo width={16} height={16} />
-          <ThemedText type='button' color='powderBlue.500' style={styles.text}>
+          <ThemedText type='button' lightColor='powderBlue.500' darkColor='white' style={styles.text}>
             {t('login.buttons.google')}
           </ThemedText>
         </Row>

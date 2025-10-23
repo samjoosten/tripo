@@ -187,7 +187,7 @@ export const RoundedView = ({
               color={pathColor.toString()}
               strokeWidth={borderWidth}
               transform={[{ translateX: x }, { translateY: y }]}>
-              {!!(!pathColor && gradientColors) && (
+              {!!gradientColors && (
                 <LinearGradient colors={gradientColors} start={vec(0, 0)} end={{ x: width, y: height }} />
               )}
               {!!borderWidth && <Paint color={borderColor} strokeWidth={borderWidth} style='stroke' />}

@@ -1,9 +1,14 @@
 import { StyleSheet, View } from 'react-native';
 
-import { useColor } from 'shared/lib/theme';
+import { useThemeColor, type ColorPaletteType } from 'shared/lib/theme';
 
-const Divider = () => {
-  const color = useColor('powderBlue.50', 'powderBlue.800');
+type Props = {
+  lightColor?: ColorPaletteType;
+  darkColor?: ColorPaletteType;
+};
+
+const Divider = ({ lightColor, darkColor }: Props) => {
+  const color = useThemeColor('divider', { light: lightColor, dark: darkColor });
 
   return <View style={[styles.container, { backgroundColor: color }]} />;
 };

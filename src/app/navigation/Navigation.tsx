@@ -2,12 +2,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SplashScreen from 'expo-splash-screen';
 import { useTranslation } from 'react-i18next';
-import { useConvexAuth } from 'convex/react';
 
 import { LoginScreen, RegistrationScreen } from 'screens';
+import { cv } from 'shared/lib/theme';
 import type { NavigationStackLists } from 'shared/routes';
 import { AppNavigation } from 'shared/routes';
-import { cv } from 'shared/lib/theme';
 
 import { TabNavigation } from './TabNavigation';
 
@@ -15,7 +14,7 @@ export const Stack = createNativeStackNavigator<NavigationStackLists>();
 
 const Navigation = () => {
   const { t } = useTranslation();
-  const { isAuthenticated } = useConvexAuth();
+  const isAuthenticated = false; // supabase useAuth();
 
   return (
     <NavigationContainer onReady={() => SplashScreen.hideAsync()}>

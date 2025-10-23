@@ -76,7 +76,10 @@ export const LoginScreen = () => {
       </Form>
       <Pressable>
         <ThemedText type='body'>
-          <Trans i18nKey={'login.buttons.register'} components={[<ThemedText type='body' color='azure.500' />]} />
+          <Trans
+            i18nKey={'login.buttons.register'}
+            components={[<ThemedText type='body' lightColor='azure.500' darkColor='azure.500' />]}
+          />
         </ThemedText>
       </Pressable>
     </AnimatedScreenContent>

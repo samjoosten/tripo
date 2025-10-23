@@ -10,7 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import type { ColorPaletteType } from 'shared/lib/theme';
-import { cv, useColor } from 'shared/lib/theme';
+import { cv, useThemeColor } from 'shared/lib/theme';
 import { LoadingSpinner } from 'shared/ui/LoadingSpinner';
 import { ThemedIcon, type IconSvgObject } from 'shared/ui/ThemedIcon';
 import { ThemedText } from 'shared/ui/ThemedText';
@@ -18,9 +18,7 @@ import { ThemedText } from 'shared/ui/ThemedText';
 import { RoundedView } from '../RoundedView/RoundedView';
 
 import { styles } from './FilledButtonStyle';
-
-const ACTIVE_COLORS = [cv('azure.400'), cv('azure.600')];
-const DISABLED_COLOR = cv('gray.300');
+import { getButtonGradient } from './getButtonGradient';
 
 type Props = {
   text?: string;
@@ -29,12 +27,10 @@ type Props = {
   autowidth?: boolean;
   leadingIcon?: IconSvgObject;
   trailingIcon?: IconSvgObject;
-  color?: ColorPaletteType;
   lightColor?: ColorPaletteType;
   darkColor?: ColorPaletteType;
   children?: React.ReactNode;
   borderWidth?: number;
-  borderColor?: ColorPaletteType;
   lightBorderColor?: ColorPaletteType;
   darkBorderColor?: ColorPaletteType;
   onPress?: () => void;
@@ -47,21 +43,24 @@ export const FilledButton = ({
   autowidth,
   leadingIcon,
   trailingIcon,
-  color,
   lightColor,
   darkColor,
   borderWidth,
-  borderColor,
   lightBorderColor,
   darkBorderColor,
   children,
   onPress,
 }: Props) => {
   const isDisabled = disabled || loading;
-  const colorValue = useColor(color ?? lightColor, darkColor);
-  const borderColorValue = useColor(borderColor ?? lightBorderColor, darkBorderColor);
-  const firstColor = useSharedValue(ACTIVE_COLORS[0]);
-  const secondColor = useSharedValue(ACTIVE_COLORS[1]);
+  const colorValue = useThemeColor('buttonGradient1', { light: lightColor, dark: darkColor });
+  const defaultGradientColors = [useThemeColor('buttonGradient1'), useThemeColor('buttonGradient2')];
+  const disabledColor = useThemeColor('button:disabled');
+  const borderColorValue = useThemeColor('button.border', {
+    light: lightBorderColor,
+    dark: darkBorderColor,
+  });
+  const firstColor = useSharedValue(defaultGradientColors[0]);
+  const secondColor = useSharedValue(defaultGradientColors[1]);
   const colors = useDerivedValue(() => [firstColor.value, secondColor.value]);
   const buttonScale = useSharedValue(1);
 
@@ -77,11 +76,11 @@ export const FilledButton = ({
 
   useEffect(() => {
     if (isDisabled) {
-      firstColor.value = withTiming(DISABLED_COLOR, { duration: 300 });
-      secondColor.value = withTiming(DISABLED_COLOR, { duration: 300 });
+      firstColor.value = withTiming(disabledColor, { duration: 300 });
+      secondColor.value = withTiming(disabledColor, { duration: 300 });
     } else {
-      firstColor.value = withTiming(ACTIVE_COLORS[0], { duration: 300 });
-      secondColor.value = withTiming(ACTIVE_COLORS[1], { duration: 300 });
+      firstColor.value = withTiming(defaultGradientColors[0], { duration: 300 });
+      secondColor.value = withTiming(defaultGradientColors[1], { duration: 300 });
     }
   }, [isDisabled]);
 
@@ -122,10 +121,10 @@ export const FilledButton = ({
       style={[!autowidth ? { width: '100%' } : {}]}>
       <Animated.View style={[aButtonContainerStyle, !autowidth ? { width: '100%', padding: 2 } : {}]}>
         <RoundedView
-          style={[styles.container, colorValue && { backgroundColor: colorValue }]}
+          style={[styles.container, colorValue ? { backgroundColor: colorValue } : {}]}
           borderColor={borderColorValue ?? colorValue ?? firstColor}
           borderWidth={borderWidth ?? 2}
-          gradientColors={colors}>
+          gradientColors={getButtonGradient(lightColor, darkColor, colors)}>
           {!!loading && (
             <Animated.View style={[aLoaderStyle, { position: 'absolute' }]}>
               <LoadingSpinner />

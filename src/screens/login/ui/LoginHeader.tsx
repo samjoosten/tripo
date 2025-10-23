@@ -8,7 +8,7 @@ export const LoginHeader = () => {
   return (
     <ThemedText type='title'>
       {t('login.title')}{' '}
-      <ThemedText type='title' fontFamily='ArchitectsDaughter-Regular' color='azure.500'>
+      <ThemedText type='title' fontFamily='ArchitectsDaughter-Regular' lightColor='azure.500' darkColor='azure.500'>
         challenge
       </ThemedText>
     </ThemedText>
