@@ -8,16 +8,16 @@ module.exports = {
   "newArchEnabled": true,
   "scheme": process.env.EXPO_PUBLIC_PROFILE === "production" ? "tripo" : "tripo-dev",
   "ios": {
+    "usesAppleSignIn": true,
     "supportsTablet": true,
-    "bundleIdentifier": process.env.EXPO_PUBLIC_PROFILE === "production" ? "com.samjoosten.tripo" : "com.samjoosten.tripo.dev",
-    "entitlements": ["com.apple.developer.applesignin"]
+    "bundleIdentifier": "com.samjoosten.tripo"
   },
   "android": {
     "adaptiveIcon": {
       "foregroundImage": process.env.EXPO_PUBLIC_PROFILE === "production" ? "./assets/adaptive-icon.png" : "./assets/adaptive-icon-dev.png",
       "backgroundColor": "#0B6CFE"
     },
-    "package": process.env.EXPO_PUBLIC_PROFILE === "production" ? "com.samjoosten.tripo" : "com.samjoosten.tripo.dev"
+    "package": "com.samjoosten.tripo" 
   },
   "extra": {
     "storybookEnabled": process.env.STORYBOOK_ENABLED,
@@ -31,6 +31,7 @@ module.exports = {
         "image": "./assets/splash-icon.png"
       }
     ],
+    "expo-apple-authentication",
     "react-native-edge-to-edge",
     "expo-localization",
     "expo-secure-store",

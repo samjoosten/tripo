@@ -1,5 +1,9 @@
 interface Resources {
   "en": {
+    "shared": {
+      "error": "Error",
+      "tryAgainLater": "Please try again later"
+    },
     "form": {
       "validation": {
         "required": "{{field}} is required",
@@ -25,9 +29,16 @@ interface Resources {
     },
     "register": {
       "title": "Register"
+    },
+    "socialAuth": {
+      "appleError": "Error during Apple Sign-In. Please try again."
     }
   },
   "nl": {
+    "shared": {
+      "error": "Fout",
+      "tryAgainLater": "Probeer het later opnieuw"
+    },
     "form": {
       "validation": {
         "required": "{{field}} is verplicht",
@@ -53,6 +64,9 @@ interface Resources {
     },
     "register": {
       "title": "Aanmelden"
+    },
+    "socialAuth": {
+      "appleError": "Fout tijdens Apple Sign-In. Probeer het opnieuw."
     }
   }
 }

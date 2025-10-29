@@ -124,7 +124,7 @@ module.exports = defineConfig([
       'default-param-last': 'error',
       'no-await-in-loop': 'error',
       'no-confusing-arrow': 'error',
-      'no-console': 'error',
+      'no-console': ["error", { allow: ["warn", "error"] }],
       'no-duplicate-case': 'error',
       'no-extra-boolean-cast': 'error',
       'no-extra-semi': 'error',

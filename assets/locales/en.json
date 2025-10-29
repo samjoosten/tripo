@@ -1,4 +1,8 @@
 {
+  "shared": {
+    "error": "Error",
+    "tryAgainLater": "Please try again later"
+  },
   "form": {
     "validation": {
       "required": "{{field}} is required",
@@ -24,5 +28,8 @@
   },
   "register": {
     "title": "Register"
+  },
+  "socialAuth": {
+    "appleError": "Error during Apple Sign-In. Please try again."
   }
 }
