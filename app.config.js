@@ -19,9 +19,6 @@ module.exports = {
     },
     "package": "com.samjoosten.tripo" 
   },
-  "extra": {
-    "storybookEnabled": process.env.STORYBOOK_ENABLED,
-  },
   "plugins": [
     "expo-asset",
     [
@@ -35,6 +32,12 @@ module.exports = {
     "react-native-edge-to-edge",
     "expo-localization",
     "expo-secure-store",
+    [
+      "@react-native-google-signin/google-signin",
+      {
+        "iosUrlScheme": "com.googleusercontent.apps.571653246314-aig78rvfae30pai9prb3l69n6kp22pop"
+      }
+    ],
     ["expo-font", {
       'fonts': [
         './assets/fonts/Gilroy-Medium.ttf',

@@ -10,6 +10,10 @@ import { useCacheAssets } from 'app/providers/InitProvider/useCacheAssets';
 import { i18n } from 'shared/config';
 import ThemeProvider from 'app/providers/ThemeProvider';
 
+import StorybookUI from '../.rnstorybook';
+
+const isStorybook = process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === 'true';
+
 // Keep the splash screen visible while we fetch resources
 void SplashScreen.preventAutoHideAsync();
 
@@ -24,6 +28,10 @@ if (Constants.expoConfig?.extra?.storybookEnabled === 'true') {
 
 const App = () => {
   useCacheAssets();
+
+  if (isStorybook) {
+    return <StorybookUI />;
+  }
 
   return (
     <I18nextProvider i18n={i18n}>
@@ -40,11 +48,4 @@ const App = () => {
   );
 };
 
-let AppEntryPoint = App;
-
-if (Constants.expoConfig?.extra?.storybookEnabled === 'true') {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
-  AppEntryPoint = require('../.rnstorybook').default;
-}
-
-export default AppEntryPoint;
+export default App;
