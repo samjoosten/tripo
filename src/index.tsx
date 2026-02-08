@@ -22,7 +22,7 @@ SplashScreen.setOptions({
   fade: true,
 });
 
-if (Constants.expoConfig?.extra?.storybookEnabled === 'true') {
+if (isStorybook) {
   void SplashScreen.hideAsync();
 }
 

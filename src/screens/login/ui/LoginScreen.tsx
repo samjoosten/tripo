@@ -5,6 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet } from 'react-native';
 import { FadeIn } from 'react-native-reanimated';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { sv } from 'shared/lib/theme';
 import { FilledButton } from 'shared/ui/FilledButton';
@@ -14,13 +15,17 @@ import { AnimatedScreenContent } from 'shared/ui/ScreenContent';
 import { ThemedText } from 'shared/ui/ThemedText';
 import SocialAuth from 'features/social-auth';
 import Divider from 'shared/ui/Divider';
+import type { RootStackParamList } from 'shared/routes';
+import { AppNavigation } from 'shared/routes';
 
 import type { LoginSchema } from '../model/useLoginSchema';
 import { useLoginSchema } from '../model/useLoginSchema';
 
 import { LoginHeader } from './LoginHeader';
 
-export const LoginScreen = () => {
+type LoginScreenProps = NativeStackScreenProps<RootStackParamList, AppNavigation.LOGIN>;
+
+export const LoginScreen = ({ navigation }: LoginScreenProps) => {
   const { t } = useTranslation();
   const loginSchema = useLoginSchema();
   const { control, handleSubmit } = useForm({
@@ -74,7 +79,7 @@ export const LoginScreen = () => {
         <Divider />
         <SocialAuth />
       </Form>
-      <Pressable>
+      <Pressable onPress={() => navigation.navigate(AppNavigation.REGISTER)}>
         <ThemedText type='body'>
           <Trans
             i18nKey={'login.buttons.register'}

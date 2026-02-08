@@ -11,6 +11,10 @@ export const styles = StyleSheet.create({
     fontFamily: 'Gilroy-SemiBold',
     fontSize: sv('text.xl'),
   },
+  sectionHeader: {
+    fontFamily: 'Gilroy-SemiBold',
+    fontSize: sv('text.lg'),
+  },
   subtitle: {
     fontFamily: 'Gilroy-Regular',
     fontSize: sv('text.lg'),
