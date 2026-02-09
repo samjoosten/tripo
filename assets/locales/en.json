@@ -27,7 +27,15 @@
     }
   },
   "register": {
-    "title": "Register"
+    "title": "Register",
+    "labels": {
+      "name": "Name",
+      "email": "Email",
+      "password": "Password"
+    },
+    "buttons": {
+      "register": "Sign up"
+    }
   },
   "socialAuth": {
     "appleError": "Error during Apple Sign-In. Please try again."

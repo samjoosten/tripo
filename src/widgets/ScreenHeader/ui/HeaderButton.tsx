@@ -17,7 +17,7 @@ export const HeaderButton = ({ icon, ...rest }: Props) => {
   return (
     <Pressable {...rest} style={{ padding: sv('spacing.2xs') }}>
       <RoundedView style={[styles.container, { backgroundColor }]} borderWidth={2} borderColor={colorValue}>
-        <ThemedIcon icon={icon} />
+        <ThemedIcon icon={icon} lightColor='powderBlue.400' darkColor='white' />
       </RoundedView>
     </Pressable>
   );

@@ -17,6 +17,7 @@
     "@hookform/resolvers": "^5.2.1",
     "@hugeicons-pro/core-solid-rounded": "^1.0.14",
     "@hugeicons-pro/core-stroke-rounded": "^1.0.14",
+    "@hugeicons-pro/core-stroke-standard": "^3.1.0",
     "@hugeicons/react-native": "^1.0.7",
     "@react-native-google-signin/google-signin": "^16.1.1",
     "@react-native/typescript-config": "^0.78.0",

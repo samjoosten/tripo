@@ -1,19 +1,22 @@
-import { HugeiconsIcon } from '@hugeicons/react-native';
 import type { HugeiconsProps } from '@hugeicons/react-native';
+import { HugeiconsIcon } from '@hugeicons/react-native';
 import Animated from 'react-native-reanimated';
 
-import { cv, sv } from 'shared/lib/theme';
+import type { ColorPaletteType } from 'shared/lib/theme';
+import { sv, useThemeColor } from 'shared/lib/theme';
 
 import type { IconSvgObject } from './types';
 
 type Props = {
   size?: number;
-  color?: string;
+  lightColor?: ColorPaletteType;
+  darkColor?: ColorPaletteType;
   icon: IconSvgObject;
 } & HugeiconsProps;
 
-export const ThemedIcon = ({ icon, size = sv('icon.m'), color = cv('gray.600'), ...rest }: Props) => {
-  return <HugeiconsIcon icon={icon} size={size} color={color} {...rest} />;
+export const ThemedIcon = ({ icon, size = sv('icon.m'), lightColor, darkColor, ...rest }: Props) => {
+  const themeColor = useThemeColor('icon', { light: lightColor, dark: darkColor });
+  return <HugeiconsIcon icon={icon} size={size} color={themeColor} {...rest} />;
 };
 
 export const AnimatedIcon = Animated.createAnimatedComponent(ThemedIcon);

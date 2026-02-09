@@ -17,7 +17,7 @@ type Props = {
   headerAction?: string;
   onHeaderActionPress?: () => void;
 } & ViewProps &
-  NativeStackScreenProps<RootStackParamList, keyof RootStackParamList>;
+  Partial<NativeStackScreenProps<RootStackParamList, keyof RootStackParamList>>;
 
 export const ScreenContent = ({
   withBottomSafeArea,
@@ -49,7 +49,7 @@ export const ScreenContent = ({
   );
 
   useEffect(() => {
-    if (!headerAction) return;
+    if (!headerAction || !navigation) return;
 
     navigation.setOptions({
       headerRight: renderHeaderAction,

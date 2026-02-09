@@ -27,7 +27,15 @@
     }
   },
   "register": {
-    "title": "Aanmelden"
+    "title": "Aanmelden",
+    "labels": {
+      "name": "Naam",
+      "email": "Email",
+      "password": "Wachtwoord"
+    },
+    "buttons": {
+      "register": "Aanmelden"
+    }
   },
   "socialAuth": {
     "appleError": "Fout tijdens Apple Sign-In. Probeer het opnieuw."

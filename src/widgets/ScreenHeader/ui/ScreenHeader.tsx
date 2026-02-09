@@ -1,7 +1,7 @@
-import { ArrowLeft01Icon } from '@hugeicons-pro/core-stroke-rounded';
 import type { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ArrowLeft01Icon } from '@hugeicons-pro/core-stroke-standard';
 
 import { useThemeColor } from 'shared/lib/theme';
 import { sizeValue as sv } from 'shared/lib/theme/util/sizeValue';
@@ -26,9 +26,7 @@ export const ScreenHeader = (props: NativeStackHeaderProps) => {
         )}
       </View>
       <ThemedText type='sectionHeader'>{props.options.title}</ThemedText>
-      <View style={{ flex: 1, alignItems: 'flex-end' }}>
-        {props.options.headerRight ? props.options.headerRight({}) : null}
-      </View>
+      <View style={styles.headerRight}>{props.options.headerRight ? props.options.headerRight({}) : null}</View>
     </View>
   );
 };
@@ -39,5 +37,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     paddingHorizontal: sv('spacing.sm'),
+  },
+  headerRight: {
+    flex: 1,
+    alignItems: 'flex-end',
   },
 });

@@ -1,14 +1,14 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import * as SplashScreen from 'expo-splash-screen';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import Constants from 'expo-constants';
 import { I18nextProvider } from 'react-i18next';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import Navigation from 'app/navigation/Navigation';
 import { InitProvider } from 'app/providers/InitProvider';
 import { useCacheAssets } from 'app/providers/InitProvider/useCacheAssets';
-import { i18n } from 'shared/config';
 import ThemeProvider from 'app/providers/ThemeProvider';
+import { i18n } from 'shared/config';
 
 import StorybookUI from '../.rnstorybook';
 
@@ -26,6 +26,8 @@ if (isStorybook) {
   void SplashScreen.hideAsync();
 }
 
+const queryClient = new QueryClient();
+
 const App = () => {
   useCacheAssets();
 
@@ -35,15 +37,17 @@ const App = () => {
 
   return (
     <I18nextProvider i18n={i18n}>
-      <GestureHandlerRootView>
-        <SafeAreaProvider>
-          <InitProvider>
-            <ThemeProvider>
-              <Navigation />
-            </ThemeProvider>
-          </InitProvider>
-        </SafeAreaProvider>
-      </GestureHandlerRootView>
+      <QueryClientProvider client={queryClient}>
+        <GestureHandlerRootView>
+          <SafeAreaProvider>
+            <InitProvider>
+              <ThemeProvider>
+                <Navigation />
+              </ThemeProvider>
+            </InitProvider>
+          </SafeAreaProvider>
+        </GestureHandlerRootView>
+      </QueryClientProvider>
     </I18nextProvider>
   );
 };

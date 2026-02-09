@@ -9,10 +9,7 @@ export const useLoginSchema = () => {
     return z
       .object({
         email: z.email(t('form.validation.email', { field: t('login.labels.email') })),
-        password: z
-          .string(t('form.validation.required', { field: t('login.labels.password') }))
-          .min(6, t('form.validation.minLength', { field: t('login.labels.password'), min: 6 }))
-          .max(100, t('form.validation.maxLength', { field: t('login.labels.password'), max: 100 })),
+        password: z.string(t('form.validation.required', { field: t('login.labels.password') })),
       })
       .required();
   }, [t]);

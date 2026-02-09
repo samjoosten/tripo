@@ -1,69 +1,85 @@
 interface Resources {
   "en": {
-    "shared": {
-      "error": "Error",
-      "tryAgainLater": "Please try again later"
-    },
     "form": {
       "validation": {
-        "required": "{{field}} is required",
+        "default": "{{field}} is invalid",
         "email": "{{field}} is not a valid email address",
-        "minLength": "{{field}} must be at least {{min}} characters long",
         "maxLength": "{{field}} cannot be longer than {{max}} characters",
+        "minLength": "{{field}} must be at least {{min}} characters long",
         "passwordStrength": "Password must be at least 8 characters long, with at least one uppercase letter, one number, and one special character",
-        "default": "{{field}} is invalid"
+        "required": "{{field}} is required"
       }
     },
     "login": {
-      "title": "Every week a new",
+      "buttons": {
+        "apple": "Continue with Apple",
+        "google": "Continue with Google",
+        "login": "Sign in",
+        "register": "Don't have an account? <0>Sign up</0>"
+      },
       "labels": {
         "email": "Email",
         "password": "Password"
       },
-      "buttons": {
-        "login": "Sign in",
-        "register": "Don't have an account? <0>Sign up</0>",
-        "google": "Continue with Google",
-        "apple": "Continue with Apple"
-      }
+      "title": "Every week a new"
     },
     "register": {
+      "buttons": {
+        "register": "Sign up"
+      },
+      "labels": {
+        "email": "Email",
+        "name": "Name",
+        "password": "Password"
+      },
       "title": "Register"
+    },
+    "shared": {
+      "error": "Error",
+      "tryAgainLater": "Please try again later"
     },
     "socialAuth": {
       "appleError": "Error during Apple Sign-In. Please try again."
     }
   },
   "nl": {
-    "shared": {
-      "error": "Fout",
-      "tryAgainLater": "Probeer het later opnieuw"
-    },
     "form": {
       "validation": {
-        "required": "{{field}} is verplicht",
+        "default": "{{field}} is ongeldig",
         "email": "{{field}} is geen geldig e-mailadres",
-        "minLength": "{{field}} moet minimaal {{min}} karakters bevatten",
         "maxLength": "{{field}} mag maximaal {{max}} karakters bevatten",
+        "minLength": "{{field}} moet minimaal {{min}} karakters bevatten",
         "passwordStrength": "{{field}} moet minimaal 8 tekens bevatten, met ten minste één hoofdletter, één cijfer en één speciaal teken",
-        "default": "{{field}} is ongeldig"
+        "required": "{{field}} is verplicht"
       }
     },
     "login": {
-      "title": "Elke week een nieuwe",
+      "buttons": {
+        "apple": "Doorgaan met Apple",
+        "google": "Doorgaan met Google",
+        "login": "Inloggen",
+        "register": "Nog geen account? <0>Meld je aan</0>"
+      },
       "labels": {
         "email": "Email",
         "password": "Wachtwoord"
       },
-      "buttons": {
-        "login": "Inloggen",
-        "register": "Nog geen account? <0>Meld je aan</0>",
-        "google": "Doorgaan met Google",
-        "apple": "Doorgaan met Apple"
-      }
+      "title": "Elke week een nieuwe"
     },
     "register": {
+      "buttons": {
+        "register": "Aanmelden"
+      },
+      "labels": {
+        "email": "Email",
+        "name": "Naam",
+        "password": "Wachtwoord"
+      },
       "title": "Aanmelden"
+    },
+    "shared": {
+      "error": "Fout",
+      "tryAgainLater": "Probeer het later opnieuw"
     },
     "socialAuth": {
       "appleError": "Fout tijdens Apple Sign-In. Probeer het opnieuw."

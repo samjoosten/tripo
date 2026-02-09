@@ -1,22 +1,21 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ViewIcon, ViewOffIcon } from '@hugeicons-pro/core-stroke-rounded';
-import { useState } from 'react';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Controller, useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet } from 'react-native';
 import { FadeIn } from 'react-native-reanimated';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
+import SocialAuth from 'features/social-auth';
 import { sv } from 'shared/lib/theme';
+import type { RootStackParamList } from 'shared/routes';
+import { AppNavigation } from 'shared/routes';
+import Divider from 'shared/ui/Divider';
 import { FilledButton } from 'shared/ui/FilledButton';
 import { Form } from 'shared/ui/Form';
 import { FormInput } from 'shared/ui/FormInput';
+import { FormPasswordInput } from 'shared/ui/FormPasswordInput';
 import { AnimatedScreenContent } from 'shared/ui/ScreenContent';
 import { ThemedText } from 'shared/ui/ThemedText';
-import SocialAuth from 'features/social-auth';
-import Divider from 'shared/ui/Divider';
-import type { RootStackParamList } from 'shared/routes';
-import { AppNavigation } from 'shared/routes';
 
 import type { LoginSchema } from '../model/useLoginSchema';
 import { useLoginSchema } from '../model/useLoginSchema';
@@ -31,12 +30,6 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(loginSchema),
   });
-
-  const [passwordVisible, setPasswordVisible] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setPasswordVisible((prev) => !prev);
-  };
 
   const onSubmitLogin = (data: LoginSchema) => {
     console.log('Form submitted with data:', data);
@@ -63,15 +56,11 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
           control={control}
           name='password'
           render={({ field: { onChange, value }, formState: { errors } }) => (
-            <FormInput
+            <FormPasswordInput
               label={t('login.labels.password')}
               value={value}
-              secureTextEntry={!passwordVisible}
-              style={!passwordVisible && styles.passwordSecure}
               onChangeText={onChange}
               error={errors.password?.message}
-              trailingIcon={passwordVisible ? ViewOffIcon : ViewIcon}
-              onTrailingIconPress={togglePasswordVisibility}
             />
           )}
         />
@@ -97,9 +86,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     rowGap: sv('spacing.lg'),
-  },
-  passwordSecure: {
-    fontFamily: '',
-    fontSize: sv('text.sm'),
   },
 });
