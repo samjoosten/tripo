@@ -21,4 +21,11 @@ export const SIZING = {
     '3xl': 48,
     '4xl': 64,
   },
+  icon: {
+    sm: 16,
+    m: 24,
+    lg: 32,
+    xl: 48,
+    '2xl': 64,
+  },
 } as const;

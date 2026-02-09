@@ -9,6 +9,8 @@ import { RoundedView } from '../RoundedView/RoundedView';
 import { AnimatedIcon, type IconSvgObject } from '../ThemedIcon';
 import { AnimatedThemedText, ThemedText } from '../ThemedText';
 
+const INPUT_HEIGHT = 45;
+
 type Props = {
   showFocus?: boolean;
   error?: string;
@@ -109,6 +111,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     columnGap: sv('spacing.xs'),
     marginTop: sv('spacing.xs'),
+    height: INPUT_HEIGHT,
   },
   input: {
     flexGrow: 1,

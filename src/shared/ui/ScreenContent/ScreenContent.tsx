@@ -1,15 +1,23 @@
+import type { NativeStackHeaderItemProps, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useCallback, useEffect } from 'react';
 import type { ViewProps } from 'react-native';
-import { StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { sv, useThemeColor } from 'shared/lib/theme';
+import type { RootStackParamList } from 'shared/routes';
+
+import { ThemedText } from '../ThemedText';
 
 type Props = {
   withTopSafeArea?: boolean;
   withBottomSafeArea?: boolean;
   horizontalPadding?: number;
-} & ViewProps;
+  headerAction?: string;
+  onHeaderActionPress?: () => void;
+} & ViewProps &
+  NativeStackScreenProps<RootStackParamList, keyof RootStackParamList>;
 
 export const ScreenContent = ({
   withBottomSafeArea,
@@ -17,10 +25,36 @@ export const ScreenContent = ({
   horizontalPadding,
   children,
   style,
+  headerAction,
+  navigation,
+  onHeaderActionPress,
   ...rest
 }: Props) => {
   const { top, bottom } = useSafeAreaInsets();
   const backgroundColor = useThemeColor('scaffold');
+
+  const renderHeaderAction = useCallback(
+    (_: NativeStackHeaderItemProps) => {
+      if (!headerAction) return null;
+
+      return (
+        <Pressable onPress={onHeaderActionPress} style={({ pressed }) => ({ opacity: pressed ? 0.75 : 1 })}>
+          <ThemedText type='button' lightColor='azure.500' darkColor='azure.300'>
+            {headerAction}
+          </ThemedText>
+        </Pressable>
+      );
+    },
+    [headerAction, onHeaderActionPress]
+  );
+
+  useEffect(() => {
+    if (!headerAction) return;
+
+    navigation.setOptions({
+      headerRight: renderHeaderAction,
+    });
+  }, [navigation, headerAction, renderHeaderAction]);
 
   const getTopPadding = () => {
     if (withTopSafeArea) {

@@ -1,5 +1,4 @@
 import { NavigationContainer } from '@react-navigation/native';
-import type { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SplashScreen from 'expo-splash-screen';
 import { useTranslation } from 'react-i18next';
@@ -18,8 +17,6 @@ const Navigation = () => {
   const { t } = useTranslation();
   const isAuthenticated = false; // supabase useAuth();
 
-  const renderHeader = (props: NativeStackHeaderProps) => <ScreenHeader {...props} />;
-
   return (
     <NavigationContainer onReady={() => SplashScreen.hideAsync()}>
       <Stack.Navigator
@@ -33,7 +30,10 @@ const Navigation = () => {
             <Stack.Screen
               name={AppNavigation.REGISTER}
               component={RegistrationScreen}
-              options={{ title: t('register.title'), header: renderHeader }}
+              options={{
+                title: t('register.title'),
+                header: ScreenHeader,
+              }}
             />
           </>
         ) : (

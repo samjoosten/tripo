@@ -2,7 +2,7 @@ import { ArrowLeft01Icon } from '@hugeicons-pro/core-stroke-rounded';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { View } from 'react-native';
 
-import { cv } from 'shared/lib/theme';
+import { cv, sv } from 'shared/lib/theme';
 
 import { HeaderButton } from './HeaderButton';
 
@@ -17,6 +17,7 @@ const meta = {
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: cv('scaffold'),
+          paddingHorizontal: sv('spacing.m'),
           paddingBottom: 100,
         }}>
         <Story />

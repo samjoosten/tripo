@@ -12,7 +12,7 @@ type Props = {
   icon: IconSvgObject;
 } & HugeiconsProps;
 
-export const ThemedIcon = ({ icon, size = sv('spacing.m'), color = cv('gray.600'), ...rest }: Props) => {
+export const ThemedIcon = ({ icon, size = sv('icon.m'), color = cv('gray.600'), ...rest }: Props) => {
   return <HugeiconsIcon icon={icon} size={size} color={color} {...rest} />;
 };
 

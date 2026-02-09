@@ -5,15 +5,18 @@ import { sv, useThemeColor } from 'shared/lib/theme';
 import { RoundedView } from 'shared/ui/RoundedView';
 import { ThemedIcon, type IconSvgObject } from 'shared/ui/ThemedIcon';
 
+const SIZE = 36;
+
 type Props = {
   icon: IconSvgObject;
 } & PressableProps;
 
 export const HeaderButton = ({ icon, ...rest }: Props) => {
-  const colorValue = useThemeColor('button.border');
+  const colorValue = useThemeColor('button.border', { light: 'powderBlue.50', dark: 'powderBlue.700' });
+  const backgroundColor = useThemeColor('scaffold', { light: 'scaffoldButton', dark: 'scaffoldButtonDark' });
   return (
-    <Pressable {...rest}>
-      <RoundedView style={styles.container} borderWidth={2}>
+    <Pressable {...rest} style={{ padding: sv('spacing.2xs') }}>
+      <RoundedView style={[styles.container, { backgroundColor }]} borderWidth={2} borderColor={colorValue}>
         <ThemedIcon icon={icon} />
       </RoundedView>
     </Pressable>
@@ -22,9 +25,11 @@ export const HeaderButton = ({ icon, ...rest }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    borderRadius: 8,
+    padding: sv('spacing.sm'),
     justifyContent: 'center',
     alignItems: 'center',
-    padding: sv('spacing.m'),
-    borderRadius: 12,
+    width: SIZE,
+    height: SIZE,
   },
 });
