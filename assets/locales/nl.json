@@ -38,6 +38,7 @@
     }
   },
   "socialAuth": {
-    "appleError": "Fout tijdens Apple Sign-In. Probeer het opnieuw."
+    "appleError": "Fout tijdens Apple authenticatie. Probeer het opnieuw.",
+    "googleError": "Fout tijdens Google authenticatie. Probeer het opnieuw."
   }
 }

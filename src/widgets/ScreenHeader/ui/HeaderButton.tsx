@@ -1,7 +1,7 @@
 import type { PressableProps } from 'react-native';
 import { Pressable, StyleSheet } from 'react-native';
 
-import { sv, useThemeColor } from 'shared/lib/theme';
+import { sv, useThemeConfigColor } from 'shared/lib/theme';
 import { RoundedView } from 'shared/ui/RoundedView';
 import { ThemedIcon, type IconSvgObject } from 'shared/ui/ThemedIcon';
 
@@ -12,8 +12,8 @@ type Props = {
 } & PressableProps;
 
 export const HeaderButton = ({ icon, ...rest }: Props) => {
-  const colorValue = useThemeColor('button.border', { light: 'powderBlue.50', dark: 'powderBlue.700' });
-  const backgroundColor = useThemeColor('scaffold', { light: 'scaffoldButton', dark: 'scaffoldButtonDark' });
+  const colorValue = useThemeConfigColor('button.border', { light: 'powderBlue.50', dark: 'powderBlue.700' });
+  const backgroundColor = useThemeConfigColor('scaffold', { light: 'scaffoldButton', dark: 'scaffoldButtonDark' });
   return (
     <Pressable {...rest} style={{ padding: sv('spacing.2xs') }}>
       <RoundedView style={[styles.container, { backgroundColor }]} borderWidth={2} borderColor={colorValue}>

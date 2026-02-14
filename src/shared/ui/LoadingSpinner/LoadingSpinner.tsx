@@ -11,17 +11,19 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import type { ColorPaletteType, SizingType } from 'shared/lib/theme';
-import { cv, sv } from 'shared/lib/theme';
+import { sv, useThemeColor } from 'shared/lib/theme';
 
 type Props = {
-  color?: ColorPaletteType;
+  lightColor?: ColorPaletteType;
+  darkColor?: ColorPaletteType;
   size?: SizingType;
 };
 
-export const LoadingSpinner = ({ color = 'white', size = 'spacing.m' }: Props) => {
+export const LoadingSpinner = ({ size = 'spacing.m', lightColor, darkColor }: Props) => {
   const sizeValue = sv(size);
   const STROKE_WIDTH = sizeValue / 10;
   const CIRCLE_RADIUS = (sizeValue - STROKE_WIDTH) / 2;
+  const color = useThemeColor({ light: lightColor ?? 'white', dark: darkColor ?? 'white' });
 
   const progress = useSharedValue(0);
 
@@ -57,7 +59,7 @@ export const LoadingSpinner = ({ color = 'white', size = 'spacing.m' }: Props) =
       <Canvas style={{ width: sizeValue, height: sizeValue }}>
         <Path
           path={circlePath}
-          color={cv(color)}
+          color={color}
           style={'stroke'}
           strokeWidth={STROKE_WIDTH}
           strokeCap={'round'}

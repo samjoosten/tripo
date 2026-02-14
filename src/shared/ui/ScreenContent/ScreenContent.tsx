@@ -5,7 +5,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { sv, useThemeColor } from 'shared/lib/theme';
+import { sv, useThemeConfigColor } from 'shared/lib/theme';
 import type { RootStackParamList } from 'shared/routes';
 
 import { ThemedText } from '../ThemedText';
@@ -31,7 +31,7 @@ export const ScreenContent = ({
   ...rest
 }: Props) => {
   const { top, bottom } = useSafeAreaInsets();
-  const backgroundColor = useThemeColor('scaffold');
+  const backgroundColor = useThemeConfigColor('scaffold');
 
   const renderHeaderAction = useCallback(
     (_: NativeStackHeaderItemProps) => {

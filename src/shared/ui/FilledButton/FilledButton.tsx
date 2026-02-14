@@ -10,7 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import type { ColorPaletteType } from 'shared/lib/theme';
-import { cv, useThemeColor } from 'shared/lib/theme';
+import { cv, useThemeConfigColor } from 'shared/lib/theme';
 import { LoadingSpinner } from 'shared/ui/LoadingSpinner';
 import { ThemedIcon, type IconSvgObject } from 'shared/ui/ThemedIcon';
 import { ThemedText } from 'shared/ui/ThemedText';
@@ -33,6 +33,8 @@ type Props = {
   borderWidth?: number;
   lightBorderColor?: ColorPaletteType;
   darkBorderColor?: ColorPaletteType;
+  loaderLightColor?: ColorPaletteType;
+  loaderDarkColor?: ColorPaletteType;
   onPress?: () => void;
 };
 
@@ -48,14 +50,16 @@ export const FilledButton = ({
   borderWidth,
   lightBorderColor,
   darkBorderColor,
+  loaderLightColor,
+  loaderDarkColor,
   children,
   onPress,
 }: Props) => {
   const isDisabled = disabled || loading;
-  const colorValue = useThemeColor('buttonGradient1', { light: lightColor, dark: darkColor });
-  const defaultGradientColors = [useThemeColor('buttonGradient1'), useThemeColor('buttonGradient2')];
-  const disabledColor = useThemeColor('button:disabled');
-  const borderColorValue = useThemeColor('button.border', {
+  const colorValue = useThemeConfigColor('buttonGradient1', { light: lightColor, dark: darkColor });
+  const defaultGradientColors = [useThemeConfigColor('buttonGradient1'), useThemeConfigColor('buttonGradient2')];
+  const disabledColor = useThemeConfigColor('button:disabled');
+  const borderColorValue = useThemeConfigColor('button.border', {
     light: lightBorderColor,
     dark: darkBorderColor,
   });
@@ -83,6 +87,18 @@ export const FilledButton = ({
       secondColor.value = withTiming(defaultGradientColors[1], { duration: 300 });
     }
   }, [isDisabled]);
+
+  const getBorderColor = () => {
+    if (isDisabled || loading) return disabledColor;
+
+    if (borderColorValue) {
+      return borderColorValue;
+    }
+    if (colorValue) {
+      return colorValue;
+    }
+    return firstColor;
+  };
 
   const aLoaderStyle = useAnimatedStyle(() => {
     return {
@@ -122,12 +138,12 @@ export const FilledButton = ({
       <Animated.View style={[aButtonContainerStyle, !autowidth ? { width: '100%', padding: 2 } : {}]}>
         <RoundedView
           style={[styles.container, colorValue ? { backgroundColor: colorValue } : {}]}
-          borderColor={borderColorValue ?? colorValue ?? firstColor}
+          borderColor={getBorderColor()}
           borderWidth={borderWidth ?? 2}
           gradientColors={getButtonGradient(lightColor, darkColor, colors)}>
           {!!loading && (
             <Animated.View style={[aLoaderStyle, { position: 'absolute' }]}>
-              <LoadingSpinner />
+              <LoadingSpinner lightColor={loaderLightColor} darkColor={loaderDarkColor} />
             </Animated.View>
           )}
           <Animated.View style={[aContentStyle, styles.content]}>

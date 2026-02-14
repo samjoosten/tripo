@@ -3,16 +3,15 @@ import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ArrowLeft01Icon } from '@hugeicons-pro/core-stroke-standard';
 
-import { useThemeColor } from 'shared/lib/theme';
-import { sizeValue as sv } from 'shared/lib/theme/util/sizeValue';
+import { sv, useThemeConfigColor } from 'shared/lib/theme';
 import { ThemedText } from 'shared/ui/ThemedText';
 
 import { HeaderButton } from './HeaderButton';
 
 export const ScreenHeader = (props: NativeStackHeaderProps) => {
   const { top } = useSafeAreaInsets();
-  const backgroundColor = useThemeColor('scaffold');
-  const borderColor = useThemeColor('divider');
+  const backgroundColor = useThemeConfigColor('scaffold');
+  const borderColor = useThemeConfigColor('divider');
 
   return (
     <View

@@ -1,6 +1,6 @@
 export const COLOR_PALETTE = {
   white: '#ffffff',
-  scaffold: '#F8FBFE',
+  scaffold: '#F6FBFF',
   scaffoldDark: '#000814',
   scaffoldButton: '#EFF6FD',
   scaffoldButtonDark: '#000E21',

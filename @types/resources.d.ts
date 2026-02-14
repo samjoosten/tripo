@@ -39,7 +39,8 @@ interface Resources {
       "tryAgainLater": "Please try again later"
     },
     "socialAuth": {
-      "appleError": "Error during Apple Sign-In. Please try again."
+      "appleError": "Error during Apple authentication. Please try again.",
+      "googleError": "Error during Google authentication. Please try again."
     }
   },
   "nl": {
@@ -82,7 +83,8 @@ interface Resources {
       "tryAgainLater": "Probeer het later opnieuw"
     },
     "socialAuth": {
-      "appleError": "Fout tijdens Apple Sign-In. Probeer het opnieuw."
+      "appleError": "Fout tijdens Apple authenticatie. Probeer het opnieuw.",
+      "googleError": "Fout tijdens Google authenticatie. Probeer het opnieuw."
     }
   }
 }

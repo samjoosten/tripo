@@ -4,7 +4,7 @@ import type { SharedValue } from 'react-native-reanimated';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 
 import type { ColorPaletteType, SizingType } from 'shared/lib/theme';
-import { sv, useThemeColor } from 'shared/lib/theme';
+import { sv, useThemeConfigColor } from 'shared/lib/theme';
 
 import { styles } from './ThemedTextStyle';
 
@@ -17,7 +17,7 @@ type Props = {
 } & TextProps;
 
 export const ThemedText = ({ type, lightColor, darkColor, size, fontFamily, style, ...rest }: Props) => {
-  const colorValue = useThemeColor(`text.${type}`, { light: lightColor, dark: darkColor });
+  const colorValue = useThemeConfigColor(`text.${type}`, { light: lightColor, dark: darkColor });
   const sizeValue = size ? sv(size) : undefined;
 
   return (

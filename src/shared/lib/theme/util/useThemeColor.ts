@@ -12,7 +12,7 @@ type Props = {
   dark?: ColorPaletteType;
 };
 
-export const useThemeColor = (key: ThemeConfigKey, props?: Props) => {
+export const useThemeConfigColor = (key: ThemeConfigKey, props?: Props) => {
   const theme = useAppStore((state) => state.theme);
 
   const colorFromProps = props?.[theme];
@@ -24,4 +24,12 @@ export const useThemeColor = (key: ThemeConfigKey, props?: Props) => {
   const colorFromConfig = THEME_CONFIG[theme][key];
 
   return colorValue(colorFromConfig as ColorPaletteType);
+};
+
+export const useThemeColor = ({ light, dark }: Required<Props>) => {
+  const theme = useAppStore((state) => state.theme);
+
+  const colorFromProps = theme === 'light' ? light : dark;
+
+  return colorValue(colorFromProps);
 };

@@ -5,10 +5,12 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet } from 'react-native';
 import { FadeIn } from 'react-native-reanimated';
 
-import SocialAuth from 'features/social-auth';
+import { AppleSignIn } from 'features/apple-sign-in';
+import { GoogleSignIn } from 'features/google-sign-in';
 import { sv } from 'shared/lib/theme';
 import type { RootStackParamList } from 'shared/routes';
 import { AppNavigation } from 'shared/routes';
+import Column from 'shared/ui/Column';
 import Divider from 'shared/ui/Divider';
 import { FilledButton } from 'shared/ui/FilledButton';
 import { Form } from 'shared/ui/Form';
@@ -31,9 +33,7 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmitLogin = (data: LoginSchema) => {
-    console.log('Form submitted with data:', data);
-  };
+  const onSubmitLogin = (_: LoginSchema) => {};
 
   return (
     <AnimatedScreenContent entering={FadeIn} style={styles.container}>
@@ -66,7 +66,10 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
         />
         <FilledButton text={t('login.buttons.login')} onPress={handleSubmit(onSubmitLogin)} />
         <Divider />
-        <SocialAuth />
+        <Column spacing='spacing.xs'>
+          <AppleSignIn />
+          <GoogleSignIn />
+        </Column>
       </Form>
       <Pressable onPress={() => navigation.navigate(AppNavigation.REGISTER)}>
         <ThemedText type='body'>

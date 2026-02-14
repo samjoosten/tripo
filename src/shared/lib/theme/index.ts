@@ -3,4 +3,4 @@ export { colorValue as cv } from './util/useColorValue';
 export type { SizingType } from './types/sizing';
 export { sizeValue as sv } from './util/sizeValue';
 export { useStyle } from './util/useStyle';
-export { useThemeColor } from './util/useThemeColor';
+export { useThemeConfigColor, useThemeColor } from './util/useThemeColor';

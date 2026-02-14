@@ -3,7 +3,7 @@ import type { FocusEvent, TextInputProps, BlurEvent } from 'react-native';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import Animated, { LinearTransition, useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
 
-import { cv, sv, useThemeColor } from 'shared/lib/theme';
+import { cv, sv, useThemeConfigColor } from 'shared/lib/theme';
 
 import { RoundedView } from '../RoundedView/RoundedView';
 import { AnimatedIcon, type IconSvgObject } from '../ThemedIcon';
@@ -32,12 +32,11 @@ export const FormInput = ({
   style,
   ...rest
 }: Props) => {
-  const backgroundColor = useThemeColor('input');
-  const defaultColor = useThemeColor('input.border');
-  const focusedColor = useThemeColor('input.border:focused');
-  const placeholderTextColor = useThemeColor('input.placeholder');
-  const errorColor = useThemeColor('input.border:error');
-
+  const backgroundColor = useThemeConfigColor('input');
+  const defaultColor = useThemeConfigColor('input.border');
+  const focusedColor = useThemeConfigColor('input.border:focused');
+  const placeholderTextColor = useThemeConfigColor('input.placeholder');
+  const errorColor = useThemeConfigColor('input.border:error');
   const colorSv = useSharedValue(defaultColor);
 
   useEffect(() => {

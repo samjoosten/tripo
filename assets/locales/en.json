@@ -38,6 +38,7 @@
     }
   },
   "socialAuth": {
-    "appleError": "Error during Apple Sign-In. Please try again."
+    "appleError": "Error during Apple authentication. Please try again.",
+    "googleError": "Error during Google authentication. Please try again."
   }
 }

@@ -10,14 +10,34 @@ module.exports = {
   "ios": {
     "usesAppleSignIn": true,
     "supportsTablet": true,
-    "bundleIdentifier": "com.samjoosten.tripo"
+    "bundleIdentifier": "com.samjoosten.tripo",
+    "associatedDomains": ["applinks:tripo-app.com"]
   },
   "android": {
     "adaptiveIcon": {
       "foregroundImage": process.env.EXPO_PUBLIC_PROFILE === "production" ? "./assets/adaptive-icon.png" : "./assets/adaptive-icon-dev.png",
       "backgroundColor": "#0B6CFE"
     },
-    "package": "com.samjoosten.tripo" 
+    "package": "com.samjoosten.tripo",
+    "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "*.tripo-app.com",
+              "pathPrefix": "/join"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ] 
+  },
+  "extra": {
+    "eas": {
+      "projectId": "437d46f1-0e04-41bc-85e9-b80fda0d28ba"
+    }
   },
   "plugins": [
     "expo-asset",

@@ -14,9 +14,7 @@ export const useRegisterMutation = () => {
       password: password,
       options: {
         data: {
-          raw_user_meta_data: {
-            name,
-          },
+          name,
         },
       },
     });
