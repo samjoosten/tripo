@@ -1,11 +1,18 @@
 import { Canvas, Circle, ImageSVG, LinearGradient, Skia, Text, useFont, vec } from '@shopify/react-native-skia';
+import { Image, StyleSheet, View } from 'react-native';
 
 import { sv } from 'shared/lib/theme';
 
 const CANVAS_SIZE = 100;
 const PROFILE_SHAPE_SIZE = 60;
 
-const GRADIENTS = [['#8ECAE6', '#99AFDA']];
+const GRADIENTS = [
+  ['#8ECAE6', '#99AFDA'],
+  ['#A5DCEA', '#A5EAEA'],
+  ['#AFE4C4', '#D8E4AF'],
+  ['#F3E2B7', '#F3C2B7'],
+  ['#A4ABE9', '#C8A4E9'],
+];
 
 const profileShape = Skia.SVG.MakeFromString(
   `<svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -15,29 +22,52 @@ const profileShape = Skia.SVG.MakeFromString(
 
 type Props = {
   name: string;
+  avatarUrl?: string;
 };
 
-const ProfileAvatar = ({ name }: Props) => {
+export const ProfileAvatar = ({ name, avatarUrl }: Props) => {
   const fontSize = sv('text.lg');
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-require-imports
   const font = useFont(require('../../../../assets/fonts/ArchitectsDaughter-Regular.ttf'), fontSize);
+  const gradient = GRADIENTS[name.length % GRADIENTS.length];
 
   if (!font) {
     return null;
+  }
+
+  if (avatarUrl) {
+    return (
+      <View style={[styles.container, styles.imageContainer]}>
+        <Image source={{ uri: avatarUrl }} style={styles.image} resizeMode='cover' />
+      </View>
+    );
   }
 
   const textX = CANVAS_SIZE / 2 - font.measureText(name[0]).width / 2;
   const textY = CANVAS_SIZE / 2 + font.measureText(name[0]).height / 2;
 
   return (
-    <Canvas style={{ width: CANVAS_SIZE, height: CANVAS_SIZE }}>
+    <Canvas style={styles.container}>
       <Circle r={CANVAS_SIZE / 2} cx={CANVAS_SIZE / 2} cy={CANVAS_SIZE / 2}>
-        <LinearGradient start={vec(CANVAS_SIZE / 2, 0)} end={vec(CANVAS_SIZE / 2, CANVAS_SIZE)} colors={GRADIENTS[0]} />
+        <LinearGradient start={vec(CANVAS_SIZE / 2, 0)} end={vec(CANVAS_SIZE / 2, CANVAS_SIZE)} colors={gradient} />
       </Circle>
       <ImageSVG svg={profileShape} x={20} y={20} width={PROFILE_SHAPE_SIZE} height={PROFILE_SHAPE_SIZE} />
-      <Text x={textX} y={textY} text={name[0]} font={font} />
+      <Text x={textX} y={textY} text={name[0].toUpperCase()} font={font} />
     </Canvas>
   );
 };
 
-export default ProfileAvatar;
+const styles = StyleSheet.create({
+  container: {
+    width: CANVAS_SIZE,
+    height: CANVAS_SIZE,
+  },
+  imageContainer: {
+    borderRadius: CANVAS_SIZE / 2,
+    overflow: 'hidden',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+});

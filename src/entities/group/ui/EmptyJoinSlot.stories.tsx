@@ -3,11 +3,11 @@ import { View } from 'react-native';
 
 import { cv } from 'shared/lib/theme';
 
-import { ProfileAvatar } from './ProfileAvatar';
+import { EmptyJoinSlot } from './EmptyJoinSlot';
 
 const meta = {
-  title: 'User/Profile Avatar',
-  component: ProfileAvatar,
+  title: 'Group/Empty Join Slot',
+  component: EmptyJoinSlot,
   decorators: [
     (Story) => (
       <View
@@ -21,24 +21,10 @@ const meta = {
       </View>
     ),
   ],
-  argTypes: {
-    name: { control: 'text' },
-  },
-} satisfies Meta<typeof ProfileAvatar>;
+} satisfies Meta<typeof EmptyJoinSlot>;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    name: 'John Doe',
-  },
-};
-
-export const WithImage: Story = {
-  args: {
-    name: 'sam',
-    avatarUrl: 'https://lh3.googleusercontent.com/a/ACg8ocJAy9Zvo1L9rdO2OICk3X9sO5idx_YIj3xZhndbN-dSgN7hUhy8=s96-c',
-  },
-};
+export const Default: Story = {};
 
 export default meta;

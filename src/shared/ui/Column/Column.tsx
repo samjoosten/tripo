@@ -9,10 +9,13 @@ type Props = {
   justify?: ViewStyle['justifyContent'];
 } & ViewProps;
 
-const Column = ({ spacing, align, justify, ...rest }: Props) => {
+const Column = ({ spacing, align, justify, style, ...rest }: Props) => {
   const spacingValue = sv(spacing || 'spacing.m');
   return (
-    <View style={[styles.container, { rowGap: spacingValue, alignItems: align, justifyContent: justify }]} {...rest} />
+    <View
+      style={[styles.container, { rowGap: spacingValue, alignItems: align, justifyContent: justify }, style]}
+      {...rest}
+    />
   );
 };
 
