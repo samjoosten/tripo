@@ -6,6 +6,7 @@ export enum AppNavigation {
   MAIN = 'Main',
   PROFILE = 'Profile',
   SETTINGS = 'Settings',
+  JOIN_GROUP = 'Join',
 }
 
 export type NavigationStackLists = {
@@ -14,6 +15,13 @@ export type NavigationStackLists = {
   [AppNavigation.MAIN]: undefined;
   [AppNavigation.PROFILE]: undefined;
   [AppNavigation.SETTINGS]: undefined;
+  [AppNavigation.JOIN_GROUP]: undefined;
 };
 
 export type RootStackParamList = NavigationStackLists & NavigationTabLists;
+
+export const UNAUTHORIZED_ROUTES: Array<AppNavigation> = [
+  AppNavigation.LOGIN,
+  AppNavigation.REGISTER,
+  AppNavigation.JOIN_GROUP,
+];

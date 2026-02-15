@@ -1,7 +1,8 @@
 {
   "shared": {
     "error": "Error",
-    "tryAgainLater": "Please try again later"
+    "tryAgainLater": "Please try again later",
+    "signOut": "Sign out"
   },
   "form": {
     "validation": {
@@ -40,5 +41,12 @@
   "socialAuth": {
     "appleError": "Error during Apple authentication. Please try again.",
     "googleError": "Error during Google authentication. Please try again."
+  },
+  "signout": {
+    "confirmation": "Are you sure you want to sign out?",
+    "buttons": {
+      "cancel": "Cancel",
+      "confirm": "Sign out"
+    }
   }
 }

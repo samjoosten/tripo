@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Controller, useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
-import { Pressable, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { FadeIn } from 'react-native-reanimated';
 
 import { AppleSignIn } from 'features/apple-sign-in';
@@ -16,6 +16,7 @@ import { FilledButton } from 'shared/ui/FilledButton';
 import { Form } from 'shared/ui/Form';
 import { FormInput } from 'shared/ui/FormInput';
 import { FormPasswordInput } from 'shared/ui/FormPasswordInput';
+import { PressableOpacity } from 'shared/ui/PressableOpacity';
 import { AnimatedScreenContent } from 'shared/ui/ScreenContent';
 import { ThemedText } from 'shared/ui/ThemedText';
 
@@ -71,14 +72,14 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
           <GoogleSignIn />
         </Column>
       </Form>
-      <Pressable onPress={() => navigation.navigate(AppNavigation.REGISTER)}>
+      <PressableOpacity onPress={() => navigation.navigate(AppNavigation.REGISTER)}>
         <ThemedText type='body'>
           <Trans
             i18nKey={'login.buttons.register'}
-            components={[<ThemedText type='body' lightColor='azure.500' darkColor='azure.500' />]}
+            components={[<ThemedText type='button' lightColor='azure.500' darkColor='azure.500' />]}
           />
         </ThemedText>
-      </Pressable>
+      </PressableOpacity>
     </AnimatedScreenContent>
   );
 };

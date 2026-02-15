@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     fontSize: sv('text.lg'),
   },
   body: {
-    fontFamily: 'Gilroy-SemiBold',
+    fontFamily: 'Gilroy-Regular',
     fontSize: sv('text.m'),
   },
   secondary: {

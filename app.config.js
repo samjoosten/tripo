@@ -11,7 +11,10 @@ module.exports = {
     "usesAppleSignIn": true,
     "supportsTablet": true,
     "bundleIdentifier": "com.samjoosten.tripo",
-    "associatedDomains": ["applinks:tripo-app.com"]
+    "associatedDomains": ["applinks:tripo-app.com"],
+    "entitlements": {
+      "com.apple.developer.associated-domains": ["applinks:tripo-app.com"]
+    }
   },
   "android": {
     "adaptiveIcon": {

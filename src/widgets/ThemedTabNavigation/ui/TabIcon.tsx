@@ -104,13 +104,13 @@ export const TabIcon = (props: Props) => {
             shadowBlur={7}
             shadowOffset={{ x: 0, y: 3 }}
             style={styles.middleIconContainer}>
-            <ThemedIcon icon={icon.default} color={cv('white')} size={sv('spacing.lg')} />
+            <ThemedIcon icon={icon.default} color={cv('white')} size='icon.m' />
           </RoundedView>
         ) : (
           <Animated.View
             layout={LinearTransition}
             style={[styles.iconContainer, isFocused && styles.selectedTabIcon, aTabStyle]}>
-            <ThemedIcon icon={isFocused ? icon.selected : icon.default} color={iconColor} size={sv('spacing.lg')} />
+            <ThemedIcon icon={isFocused ? icon.selected : icon.default} color={iconColor} size='icon.m' />
             {!!isFocused && <Animated.View entering={FadeIn} exiting={FadeOut} style={styles.tabSelectedIndicator} />}
           </Animated.View>
         )}

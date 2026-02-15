@@ -21,6 +21,7 @@ export const useAuth = () => {
         if (data?.claims) {
           setClaims(data.claims);
         } else {
+          console.warn('No claims found in auth response');
           setClaims(null);
         }
       } finally {
@@ -30,7 +31,11 @@ export const useAuth = () => {
 
     void getClaims();
 
-    supabase.auth.onAuthStateChange(async () => {
+    supabase.auth.onAuthStateChange(async (event) => {
+      if (event === 'SIGNED_OUT') {
+        setClaims(null);
+        return;
+      }
       await getClaims();
     });
   }, []);

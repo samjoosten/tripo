@@ -1,13 +1,14 @@
 import type { NativeStackHeaderItemProps, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useCallback, useEffect } from 'react';
 import type { ViewProps } from 'react-native';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { sv, useThemeConfigColor } from 'shared/lib/theme';
 import type { RootStackParamList } from 'shared/routes';
 
+import { PressableOpacity } from '../PressableOpacity';
 import { ThemedText } from '../ThemedText';
 
 type Props = {
@@ -38,11 +39,11 @@ export const ScreenContent = ({
       if (!headerAction) return null;
 
       return (
-        <Pressable onPress={onHeaderActionPress} style={({ pressed }) => ({ opacity: pressed ? 0.75 : 1 })}>
+        <PressableOpacity onPress={onHeaderActionPress}>
           <ThemedText type='button' lightColor='azure.500' darkColor='azure.300'>
             {headerAction}
           </ThemedText>
-        </Pressable>
+        </PressableOpacity>
       );
     },
     [headerAction, onHeaderActionPress]

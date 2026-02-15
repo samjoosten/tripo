@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { LoginScreen, RegistrationScreen } from 'screens';
 import { cv } from 'shared/lib/theme';
 import type { NavigationStackLists } from 'shared/routes';
-import { AppNavigation } from 'shared/routes';
+import { AppNavigation, linking } from 'shared/routes';
 import { ScreenHeader } from 'widgets/ScreenHeader';
 import { useAuth } from 'shared/auth';
 
@@ -34,7 +34,7 @@ const Navigation = () => {
   }, [authPending, navigationReady]);
 
   return (
-    <NavigationContainer onReady={() => setNavigationReady(true)}>
+    <NavigationContainer linking={linking} onReady={() => setNavigationReady(true)}>
       <Stack.Navigator
         initialRouteName={isAuthenticated ? AppNavigation.MAIN : AppNavigation.LOGIN}
         screenOptions={{

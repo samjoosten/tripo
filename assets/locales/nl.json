@@ -1,7 +1,8 @@
 {
   "shared": {
     "error": "Fout",
-    "tryAgainLater": "Probeer het later opnieuw"
+    "tryAgainLater": "Probeer het later opnieuw",
+    "signOut": "Uitloggen"
   },
   "form": {
     "validation": {
@@ -40,5 +41,12 @@
   "socialAuth": {
     "appleError": "Fout tijdens Apple authenticatie. Probeer het opnieuw.",
     "googleError": "Fout tijdens Google authenticatie. Probeer het opnieuw."
+  },
+  "signout": {
+    "confirmation": "Weet je zeker dat je wilt uitloggen?",
+    "buttons": {
+      "cancel": "Annuleren",
+      "confirm": "Uitloggen"
+    }
   }
 }

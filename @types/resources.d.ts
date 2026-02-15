@@ -36,7 +36,15 @@ interface Resources {
     },
     "shared": {
       "error": "Error",
+      "signOut": "Sign out",
       "tryAgainLater": "Please try again later"
+    },
+    "signout": {
+      "buttons": {
+        "cancel": "Cancel",
+        "confirm": "Sign out"
+      },
+      "confirmation": "Are you sure you want to sign out?"
     },
     "socialAuth": {
       "appleError": "Error during Apple authentication. Please try again.",
@@ -80,7 +88,15 @@ interface Resources {
     },
     "shared": {
       "error": "Fout",
+      "signOut": "Uitloggen",
       "tryAgainLater": "Probeer het later opnieuw"
+    },
+    "signout": {
+      "buttons": {
+        "cancel": "Annuleren",
+        "confirm": "Uitloggen"
+      },
+      "confirmation": "Weet je zeker dat je wilt uitloggen?"
     },
     "socialAuth": {
       "appleError": "Fout tijdens Apple authenticatie. Probeer het opnieuw.",
