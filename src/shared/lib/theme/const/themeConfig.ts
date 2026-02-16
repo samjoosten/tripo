@@ -21,6 +21,7 @@ export const THEME_CONFIG = {
     'input.border:error': 'red.400',
     'input.placeholder': 'powderBlue.200',
     divider: 'powderBlue.50',
+    tabNavBackground: 'white',
   },
   dark: {
     scaffold: 'scaffoldDark',
@@ -42,5 +43,6 @@ export const THEME_CONFIG = {
     'input.border:error': 'red.400',
     'input.placeholder': 'powderBlue.500',
     divider: 'powderBlue.800',
+    tabNavBackground: 'powderBlue.900',
   },
 } as const satisfies Record<'light' | 'dark', Record<string, ColorPaletteType>>;

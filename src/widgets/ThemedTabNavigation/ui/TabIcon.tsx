@@ -21,7 +21,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { ThemedIcon, type IconSvgObject } from 'shared/ui/ThemedIcon';
-import { cv, sv } from 'shared/lib/theme';
+import { cv, sv, useIsDarkMode, useThemeConfigColor } from 'shared/lib/theme';
 import { AppTabNavigation } from 'shared/routes';
 import { RoundedView } from 'shared/ui/RoundedView';
 
@@ -52,12 +52,16 @@ export const TabIcon = (props: Props) => {
   const { options, route, state, navigation, index } = props;
   const { buildHref } = useLinkBuilder();
 
+  const isDarkMode = useIsDarkMode();
   const tabScale = useSharedValue(1);
+  const activeColor = useThemeConfigColor('buttonGradient1');
+  const gradient2 = useThemeConfigColor('buttonGradient2');
+  const defaultColor = useThemeConfigColor('icon');
 
   const icon = iconByRouteName[route.name as AppTabNavigation] || Home11Icon;
   const isMiddleTab = state.routes.length % 2 === 1 && index === Math.floor(state.routes.length / 2);
   const isFocused = state.index === index;
-  const iconColor = isFocused ? cv('azure.500') : cv('gray.900');
+  const iconColor = isFocused ? activeColor : defaultColor;
 
   const onPress = () => {
     const event = navigation.emit({
@@ -98,8 +102,8 @@ export const TabIcon = (props: Props) => {
       <View style={[styles.tabContainer]}>
         {isMiddleTab ? (
           <RoundedView
-            gradientColors={[cv('azure.400'), cv('azure.600')]}
-            withShadow
+            gradientColors={[activeColor, gradient2]}
+            withShadow={!isDarkMode}
             shadowColor={cv('azure.300')}
             shadowBlur={7}
             shadowOffset={{ x: 0, y: 3 }}

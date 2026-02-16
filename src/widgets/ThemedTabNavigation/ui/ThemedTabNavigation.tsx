@@ -1,15 +1,20 @@
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { StyleSheet } from 'react-native';
 
-import { cv } from 'shared/lib/theme';
+import { useThemeColor, useThemeConfigColor } from 'shared/lib/theme';
 import { RoundedView } from 'shared/ui/RoundedView';
 
 import { TabIcon } from './TabIcon';
 
 export const ThemedTabNavigation = (props: BottomTabBarProps & { containerHeight: number }) => {
   const { state, descriptors, navigation, containerHeight } = props;
+  const backgroundColor = useThemeConfigColor('tabNavBackground');
+  const shadowColor = useThemeColor({ light: 'powderBlue.100', dark: 'gray.900' });
   return (
-    <RoundedView withShadow style={[styles.tabContainer, { height: containerHeight }]}>
+    <RoundedView
+      withShadow
+      shadowColor={shadowColor}
+      style={[styles.tabContainer, { height: containerHeight, backgroundColor }]}>
       {state.routes.map((route, index) => (
         <TabIcon
           key={route.key}
@@ -33,7 +38,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     width: '100%',
-    backgroundColor: cv('white'),
     pointerEvents: 'auto',
   },
 });

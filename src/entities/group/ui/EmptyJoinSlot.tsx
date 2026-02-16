@@ -1,10 +1,10 @@
 import { Canvas, Circle, DashPathEffect, Path, Skia } from '@shopify/react-native-skia';
 import { useMemo } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { useThemeColor } from 'shared/lib/theme';
 
-const SIZE = 48;
+const SIZE = 55;
 const BORDER_WIDTH = 2;
 const RADIUS = SIZE / 2;
 
@@ -19,7 +19,6 @@ export const EmptyJoinSlot = () => {
   }, []);
 
   return (
-    // <View>
     <Canvas style={styles.container}>
       <Circle cx={SIZE / 2 + BORDER_WIDTH} cy={SIZE / 2 + BORDER_WIDTH} r={SIZE / 2} color={circleColor} />
       <Path
@@ -33,7 +32,6 @@ export const EmptyJoinSlot = () => {
         <DashPathEffect intervals={[5, 7.5]} />
       </Path>
     </Canvas>
-    // </View>
   );
 };
 

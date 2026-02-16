@@ -32,7 +32,7 @@ export const TabNavigation = (props: Props) => {
   const containerHeight = NAVBAR_HEIGHT + bottom;
 
   const renderTabBar = (props: BottomTabBarProps) => (
-    <View style={[styles.tabContainer, { backgroundColor, height: containerHeight + sv('spacing.xs') }]}>
+    <View style={[styles.tabContainer, { backgroundColor, height: containerHeight + sv('spacing.m') }]}>
       <ThemedTabNavigation {...props} containerHeight={containerHeight} />
     </View>
   );

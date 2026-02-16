@@ -4,3 +4,4 @@ export type { SizingType } from './types/sizing';
 export { sizeValue as sv } from './util/sizeValue';
 export { useStyle } from './util/useStyle';
 export { useThemeConfigColor, useThemeColor } from './util/useThemeColor';
+export { useIsDarkMode } from './util/useIsDarkMode';

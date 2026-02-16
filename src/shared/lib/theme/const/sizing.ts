@@ -11,6 +11,7 @@ export const SIZING = {
     '4xl': 48,
   },
   spacing: {
+    zero: 0,
     '2xs': 4,
     xs: 8,
     sm: 12,
