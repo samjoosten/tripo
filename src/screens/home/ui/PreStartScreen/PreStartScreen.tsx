@@ -8,15 +8,22 @@ import Row from 'shared/ui/Row';
 import { ScreenContent } from 'shared/ui/ScreenContent';
 import { ThemedText } from 'shared/ui/ThemedText';
 import { TripoHeader } from 'widgets/ScreenHeader';
+import { isQuerySuccess, QueryGuard } from 'shared/lib/query-guard';
 
 export const PreStartScreen = () => {
-  const { data: user } = useCurrentUserQuery();
+  const userQuery = useCurrentUserQuery();
+
+  if (!isQuerySuccess(userQuery)) {
+    return <QueryGuard queries={[userQuery]} />;
+  }
+
+  const { data: user } = userQuery;
 
   return (
     <ScreenContent>
       <TripoHeader />
       <Column justify='center' align='center' spacing='spacing.lg' style={styles.container}>
-        <ProfileAvatar name={user?.name ?? ''} avatarUrl={user?.avatarUrl} />
+        <ProfileAvatar name={user.name} avatarUrl={user.avatarUrl} />
         <ThemedText type='header'>Jouw groep</ThemedText>
         <Column spacing='spacing.m' align='center'>
           <Row spacing='spacing.zero' justify='center' style={{ flexWrap: 'wrap' }}>

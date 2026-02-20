@@ -15,6 +15,7 @@
   "dependencies": {
     "@expo/metro-runtime": "~6.1.2",
     "@hookform/resolvers": "^5.2.1",
+    "@hugeicons-pro/core-duotone-standard": "^3.1.0",
     "@hugeicons-pro/core-solid-rounded": "^1.0.14",
     "@hugeicons-pro/core-stroke-rounded": "^1.0.14",
     "@hugeicons-pro/core-stroke-standard": "^3.1.0",

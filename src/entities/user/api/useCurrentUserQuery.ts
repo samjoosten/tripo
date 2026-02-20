@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { supabase } from 'shared/api';
 import { useAuth } from 'shared/auth';
+import { STALE_TIMES } from 'shared/config';
 
 import type { UserRaw } from './user';
 import { users } from './queryFactory';
@@ -24,6 +25,7 @@ export const useCurrentUserQuery = () => {
   return useQuery({
     ...users.current(claims?.sub || ''),
     queryFn: getCurrentUser,
+    staleTime: STALE_TIMES.ONE_HOUR,
     enabled: !!claims?.sub,
   });
 };
