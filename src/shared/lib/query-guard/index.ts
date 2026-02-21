@@ -1,2 +1,2 @@
 export { QueryGuard } from './QueryGuard';
-export { isQuerySuccess } from './isQuerySucces';
+export { isQuerySuccess, isAllQueriesSuccess } from './isQuerySucces';

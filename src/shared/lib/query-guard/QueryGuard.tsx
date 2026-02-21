@@ -13,9 +13,10 @@ type Props = {
   errorTitle?: string;
   errorSubtitle?: string;
   renderSkeleton?: () => React.ReactNode;
+  renderError?: () => React.ReactNode;
 };
 
-export const QueryGuard = ({ queries, errorTitle, errorSubtitle, renderSkeleton }: Props) => {
+export const QueryGuard = ({ queries, errorTitle, errorSubtitle, renderSkeleton, renderError }: Props) => {
   const { t } = useTranslation();
   const hasFetchingQueries = queries.some((query) => query.isFetching);
   const hasQueryErrors = queries.some((query) => query.isError);
@@ -33,7 +34,9 @@ export const QueryGuard = ({ queries, errorTitle, errorSubtitle, renderSkeleton 
   }
 
   if (hasQueryErrors) {
-    return (
+    return renderError ? (
+      renderError()
+    ) : (
       <ScreenContent>
         <Column justify='center' align='center' style={styles.container}>
           <EmptyView

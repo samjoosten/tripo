@@ -4,8 +4,9 @@ import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from 'shared/config/environmen
 import { storage } from 'shared/model';
 
 import { Cache } from './cache';
+import type { Database } from './database';
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
     storage: new Cache(storage),
     autoRefreshToken: true,
