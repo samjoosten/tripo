@@ -1,14 +1,13 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import { EmptyJoinSlot } from 'entities/group';
 import { ProfileAvatar, useCurrentUserQuery } from 'entities/user';
-import { sv } from 'shared/lib/theme';
+import { isQuerySuccess, QueryGuard } from 'shared/lib/query-guard';
 import Column from 'shared/ui/Column';
-import Row from 'shared/ui/Row';
 import { ScreenContent } from 'shared/ui/ScreenContent';
 import { ThemedText } from 'shared/ui/ThemedText';
 import { TripoHeader } from 'widgets/ScreenHeader';
-import { isQuerySuccess, QueryGuard } from 'shared/lib/query-guard';
+
+import GroupMembers from './GroupMembers';
 
 export const PreStartScreen = () => {
   const userQuery = useCurrentUserQuery();
@@ -26,32 +25,7 @@ export const PreStartScreen = () => {
         <ProfileAvatar name={user.name} avatarUrl={user.avatarUrl} />
         <ThemedText type='header'>Jouw groep</ThemedText>
         <Column spacing='spacing.m' align='center'>
-          <Row spacing='spacing.zero' justify='center' style={{ flexWrap: 'wrap' }}>
-            <View style={styles.joinSlotContainer}>
-              <EmptyJoinSlot />
-            </View>
-            <View style={styles.joinSlotContainer}>
-              <EmptyJoinSlot />
-            </View>
-            <View style={styles.joinSlotContainer}>
-              <EmptyJoinSlot />
-            </View>
-            <View style={styles.joinSlotContainer}>
-              <EmptyJoinSlot />
-            </View>
-            <View style={styles.joinSlotContainer}>
-              <EmptyJoinSlot />
-            </View>
-            <View style={styles.joinSlotContainer}>
-              <EmptyJoinSlot />
-            </View>
-            <View style={styles.joinSlotContainer}>
-              <EmptyJoinSlot />
-            </View>
-            <View style={styles.joinSlotContainer}>
-              <EmptyJoinSlot />
-            </View>
-          </Row>
+          <GroupMembers />
         </Column>
       </Column>
     </ScreenContent>
@@ -61,8 +35,5 @@ export const PreStartScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  joinSlotContainer: {
-    margin: sv('spacing.xs'),
   },
 });

@@ -22,10 +22,11 @@ const profileShape = Skia.SVG.MakeFromString(
 
 type Props = {
   name: string;
-  avatarUrl?: string;
+  avatarUrl?: string | null;
+  size?: number;
 };
 
-export const ProfileAvatar = ({ name, avatarUrl }: Props) => {
+export const ProfileAvatar = ({ name, avatarUrl, size = CANVAS_SIZE }: Props) => {
   const fontSize = sv('text.lg');
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-require-imports
   const font = useFont(require('../../../../assets/fonts/ArchitectsDaughter-Regular.ttf'), fontSize);
@@ -37,19 +38,19 @@ export const ProfileAvatar = ({ name, avatarUrl }: Props) => {
 
   if (avatarUrl) {
     return (
-      <View style={[styles.container, styles.imageContainer]}>
+      <View style={[styles.imageContainer, { width: size, height: size }]}>
         <Image source={{ uri: avatarUrl }} style={styles.image} resizeMode='cover' />
       </View>
     );
   }
 
-  const textX = CANVAS_SIZE / 2 - font.measureText(name[0]).width / 2;
-  const textY = CANVAS_SIZE / 2 + font.measureText(name[0]).height / 2;
+  const textX = size / 2 - font.measureText(name[0]).width / 2;
+  const textY = size / 2 + font.measureText(name[0]).height / 2;
 
   return (
-    <Canvas style={styles.container}>
-      <Circle r={CANVAS_SIZE / 2} cx={CANVAS_SIZE / 2} cy={CANVAS_SIZE / 2}>
-        <LinearGradient start={vec(CANVAS_SIZE / 2, 0)} end={vec(CANVAS_SIZE / 2, CANVAS_SIZE)} colors={gradient} />
+    <Canvas style={{ width: size, height: size }}>
+      <Circle r={size / 2} cx={size / 2} cy={size / 2}>
+        <LinearGradient start={vec(size / 2, 0)} end={vec(size / 2, size)} colors={gradient} />
       </Circle>
       <ImageSVG svg={profileShape} x={20} y={20} width={PROFILE_SHAPE_SIZE} height={PROFILE_SHAPE_SIZE} />
       <Text x={textX} y={textY} text={name[0].toUpperCase()} font={font} />
@@ -58,12 +59,8 @@ export const ProfileAvatar = ({ name, avatarUrl }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: CANVAS_SIZE,
-    height: CANVAS_SIZE,
-  },
   imageContainer: {
-    borderRadius: CANVAS_SIZE / 2,
+    borderRadius: '100%',
     overflow: 'hidden',
   },
   image: {

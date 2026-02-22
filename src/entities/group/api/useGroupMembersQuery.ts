@@ -22,5 +22,6 @@ export const useGroupMembersQuery = () => {
     ...group.members,
     queryFn: getGroupMembersQuery,
     staleTime: STALE_TIMES.ONE_HOUR,
+    retry: false,
   });
 };
