@@ -1,15 +1,18 @@
+import { X } from '@hugeicons-pro/core-stroke-standard';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SplashScreen from 'expo-splash-screen';
-import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { LoginScreen, RegistrationScreen } from 'screens';
+import { JoinGroupScreen, LoginScreen, RegistrationScreen } from 'screens';
+import { useAuth } from 'shared/auth';
 import { cv } from 'shared/lib/theme';
 import type { NavigationStackLists } from 'shared/routes';
 import { AppNavigation, linking } from 'shared/routes';
 import { ScreenHeader } from 'widgets/ScreenHeader';
-import { useAuth } from 'shared/auth';
+import { HeaderButton } from 'widgets/ScreenHeader/ui/HeaderButton';
+import type { IconSvgObject } from 'shared/ui/ThemedIcon';
 
 import { TabNavigation } from './TabNavigation';
 
@@ -32,6 +35,10 @@ const Navigation = () => {
 
     return () => clearTimeout(timeout);
   }, [authPending, navigationReady]);
+
+  const renderHeaderRight = (icon: IconSvgObject, onPress?: () => void) => (
+    <HeaderButton icon={icon} onPress={onPress} />
+  );
 
   return (
     <NavigationContainer linking={linking} onReady={() => setNavigationReady(true)}>
@@ -57,6 +64,21 @@ const Navigation = () => {
             <Stack.Screen name={AppNavigation.MAIN} options={{ headerShown: false }} component={TabNavigation} />
           </>
         )}
+
+        <Stack.Group navigationKey={isAuthenticated ? 'user' : 'anonymous'}>
+          <Stack.Screen
+            name={AppNavigation.JOIN_GROUP}
+            component={JoinGroupScreen}
+            options={({ navigation }) => ({
+              title: t('joinGroup.title'),
+              header: ScreenHeader,
+              headerRight: () =>
+                renderHeaderRight(X, () =>
+                  navigation.popTo(isAuthenticated ? AppNavigation.MAIN : AppNavigation.LOGIN)
+                ),
+            })}
+          />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );

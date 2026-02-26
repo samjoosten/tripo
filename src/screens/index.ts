@@ -3,3 +3,4 @@ export { RegistrationScreen } from './registration';
 export { HomeScreen } from './home';
 export { AddScreen } from './add';
 export { ProfileScreen } from './profile';
+export { JoinGroupScreen } from './join-group';

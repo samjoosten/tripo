@@ -20,7 +20,7 @@ export const ScreenHeader = (props: NativeStackHeaderProps) => {
         { backgroundColor, borderColor, paddingTop: top + sv('spacing.sm'), paddingBottom: sv('spacing.xs') },
       ]}>
       <View style={{ flex: 1 }}>
-        {props.navigation.canGoBack() && (
+        {!!(props.navigation.canGoBack() && props.options.headerBackVisible) && (
           <HeaderButton icon={ArrowLeft01Icon} onPress={() => props.navigation.goBack()} />
         )}
       </View>

@@ -48,5 +48,8 @@
       "cancel": "Annuleren",
       "confirm": "Uitloggen"
     }
+  },
+  "joinGroup": {
+    "title": "Groep joinen"
   }
 }

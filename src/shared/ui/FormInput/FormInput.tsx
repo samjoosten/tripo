@@ -32,6 +32,7 @@ export const FormInput = ({
   style,
   ...rest
 }: Props) => {
+  const textColor = useThemeConfigColor('text.body');
   const backgroundColor = useThemeConfigColor('input');
   const defaultColor = useThemeConfigColor('input.border');
   const focusedColor = useThemeConfigColor('input.border:focused');
@@ -77,7 +78,7 @@ export const FormInput = ({
           cursorColor={cv('azure.500')}
           selectionColor={cv('azure.500')}
           placeholderTextColor={placeholderTextColor}
-          style={[styles.input, style]}
+          style={[styles.input, { color: textColor }, style]}
           onFocus={handleFocus}
           onBlur={handleBlur}
           {...rest}
@@ -117,7 +118,6 @@ const styles = StyleSheet.create({
     padding: sv('spacing.sm'),
     fontFamily: 'Gilroy-Regular',
     fontSize: sv('text.m'),
-    color: cv('gray.900'),
   },
   icon: {
     padding: sv('spacing.sm'),

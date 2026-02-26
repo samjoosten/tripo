@@ -243,6 +243,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_my_group: {
+        Args: never
+        Returns: {
+          challenge_rotation_datetime: string
+          id: number
+          join_id: string
+          name: string
+        }[]
+      }
       get_my_group_members: {
         Args: never
         Returns: {

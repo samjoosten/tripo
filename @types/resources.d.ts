@@ -10,6 +10,9 @@ interface Resources {
         "required": "{{field}} is required"
       }
     },
+    "joinGroup": {
+      "title": "Join group"
+    },
     "login": {
       "buttons": {
         "apple": "Continue with Apple",
@@ -61,6 +64,9 @@ interface Resources {
         "passwordStrength": "{{field}} moet minimaal 8 tekens bevatten, met ten minste één hoofdletter, één cijfer en één speciaal teken",
         "required": "{{field}} is verplicht"
       }
+    },
+    "joinGroup": {
+      "title": "Groep joinen"
     },
     "login": {
       "buttons": {

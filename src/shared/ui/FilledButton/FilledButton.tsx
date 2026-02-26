@@ -10,7 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import type { ColorPaletteType } from 'shared/lib/theme';
-import { cv, useThemeConfigColor } from 'shared/lib/theme';
+import { cv, useThemeColor, useThemeConfigColor } from 'shared/lib/theme';
 import { LoadingSpinner } from 'shared/ui/LoadingSpinner';
 import { ThemedIcon, type IconSvgObject } from 'shared/ui/ThemedIcon';
 import { ThemedText } from 'shared/ui/ThemedText';
@@ -35,6 +35,8 @@ type Props = {
   darkBorderColor?: ColorPaletteType;
   loaderLightColor?: ColorPaletteType;
   loaderDarkColor?: ColorPaletteType;
+  lightTextColor?: ColorPaletteType;
+  darkTextColor?: ColorPaletteType;
   onPress?: () => void;
 };
 
@@ -52,11 +54,14 @@ export const FilledButton = ({
   darkBorderColor,
   loaderLightColor,
   loaderDarkColor,
+  lightTextColor,
+  darkTextColor,
   children,
   onPress,
 }: Props) => {
   const isDisabled = disabled || loading;
   const colorValue = useThemeConfigColor('buttonGradient1', { light: lightColor, dark: darkColor });
+  const textColor = useThemeColor({ light: lightTextColor ?? 'white', dark: darkTextColor ?? 'white' });
   const defaultGradientColors = [useThemeConfigColor('buttonGradient1'), useThemeConfigColor('buttonGradient2')];
   const disabledColor = useThemeConfigColor('button:disabled');
   const borderColorValue = useThemeConfigColor('button.border', {
@@ -149,9 +154,11 @@ export const FilledButton = ({
           <Animated.View style={[aContentStyle, styles.content]}>
             {children ?? (
               <>
-                {!!leadingIcon && <ThemedIcon icon={leadingIcon} color={cv('white')} />}
-                <ThemedText type='button'>{text}</ThemedText>
-                {!!trailingIcon && <ThemedIcon icon={trailingIcon} color={cv('white')} />}
+                {!!leadingIcon && <ThemedIcon icon={leadingIcon} color={cv('white')} size='icon.m' />}
+                <ThemedText type='button' style={{ color: textColor }}>
+                  {text}
+                </ThemedText>
+                {!!trailingIcon && <ThemedIcon icon={trailingIcon} color={cv('white')} size='icon.m' />}
               </>
             )}
           </Animated.View>
