@@ -3,8 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 import { supabase } from 'shared/api';
 import { STALE_TIMES } from 'shared/config';
 
+import { group } from '../queryFactory';
+
 import { mapRawToGroupMember } from './mapRawToGroupMember';
-import { group } from './queryFactory';
 
 export const useGroupMembersQuery = () => {
   const getGroupMembersQuery = async () => {

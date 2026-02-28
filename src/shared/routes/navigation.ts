@@ -15,7 +15,7 @@ export type NavigationStackLists = {
   [AppNavigation.MAIN]: undefined;
   [AppNavigation.PROFILE]: undefined;
   [AppNavigation.SETTINGS]: undefined;
-  [AppNavigation.JOIN_GROUP]: { groupId?: string };
+  [AppNavigation.JOIN_GROUP]: { groupId: string };
 };
 
 export type RootStackParamList = NavigationStackLists & NavigationTabLists;

@@ -7,4 +7,5 @@ export const mapRawToGroup = (raw: GroupRaw): Group => ({
   name: raw.name,
   challengeRotationDatetime: DateTime.fromISO(raw.challenge_rotation_datetime),
   joinId: raw.join_id,
+  ownerUserId: raw.owner_user_id,
 });

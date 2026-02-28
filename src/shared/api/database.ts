@@ -243,6 +243,17 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_group_members_by_join_id: {
+        Args: { p_join_id: string }
+        Returns: {
+          avatar_url: string
+          group_id: number
+          group_name: string
+          is_group_owner: boolean
+          user_id: number
+          user_name: string
+        }[]
+      }
       get_my_group: {
         Args: never
         Returns: {
@@ -258,6 +269,16 @@ export type Database = {
           avatar_url: string
           email: string
           name: string
+        }[]
+      }
+      get_my_group_v2: {
+        Args: never
+        Returns: {
+          challenge_rotation_datetime: string
+          id: number
+          join_id: string
+          name: string
+          owner_user_id: number
         }[]
       }
     }

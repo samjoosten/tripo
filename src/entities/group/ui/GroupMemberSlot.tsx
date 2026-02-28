@@ -29,30 +29,28 @@ type EmptyProps = {
   isLoading?: boolean;
 };
 
-type Props = LoadingProps | ResolvedProps | EmptyProps;
+type Props = (LoadingProps | ResolvedProps | EmptyProps) & { size?: number };
 
-export const GroupMemberSlot = ({ avatarUrl, name, isLoading, isEmpty }: Props) => {
+export const GroupMemberSlot = ({ avatarUrl, name, isLoading, isEmpty, size = SIZE }: Props) => {
   const circleColor = useThemeColor({ light: 'powderBlue.50', dark: 'powderBlue.700' });
 
   if (isLoading) {
     return (
-      <View style={[styles.loadingContainer, { backgroundColor: circleColor }]}>
+      <View style={[styles.loadingContainer, { backgroundColor: circleColor, width: size, height: size }]}>
         <LoadingSpinner />
       </View>
     );
   }
 
   if (isEmpty) {
-    return <EmptyJoinSlot />;
+    return <EmptyJoinSlot size={size} />;
   }
 
-  return <ProfileAvatar avatarUrl={avatarUrl} name={name} size={SIZE} />;
+  return <ProfileAvatar avatarUrl={avatarUrl} name={name} size={size} />;
 };
 
 const styles = StyleSheet.create({
   loadingContainer: {
-    width: SIZE,
-    height: SIZE,
     borderRadius: '100%',
     justifyContent: 'center',
     alignItems: 'center',
