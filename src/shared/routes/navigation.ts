@@ -10,8 +10,8 @@ export enum AppNavigation {
 }
 
 export type NavigationStackLists = {
-  [AppNavigation.LOGIN]: undefined;
-  [AppNavigation.REGISTER]: undefined;
+  [AppNavigation.LOGIN]: { joinGroupId?: number } | undefined;
+  [AppNavigation.REGISTER]: { joinGroupId?: number } | undefined;
   [AppNavigation.MAIN]: undefined;
   [AppNavigation.PROFILE]: undefined;
   [AppNavigation.SETTINGS]: undefined;

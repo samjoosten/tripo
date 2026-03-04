@@ -1,3 +1,5 @@
+import { Clock } from '@hugeicons-pro/core-duotone-standard';
+
 import { useCurrentGroupQuery } from 'entities/group';
 import { ProfileAvatar, useCurrentUserQuery } from 'entities/user';
 import { isQuerySuccess, QueryGuard } from 'shared/lib/query-guard';
@@ -6,6 +8,7 @@ import Column from 'shared/ui/Column';
 import { ScreenContent } from 'shared/ui/ScreenContent';
 import { ThemedText } from 'shared/ui/ThemedText';
 import { TripoHeader } from 'widgets/ScreenHeader';
+import { EmptyView } from 'shared/ui/Empty';
 
 import GroupMembers from './GroupMembers';
 import JoinLinkButton from './JoinLinkButton';
@@ -26,7 +29,11 @@ export const PreStartScreen = () => {
       <ScreenContent>
         <TripoHeader />
         <Column justify='center' align='center' spacing='spacing.lg' style={CONTAINER.FLEX_1}>
-          <ThemedText type='body'>Wachten op de groepsleider...</ThemedText>
+          <EmptyView
+            icon={Clock}
+            text='Wachten op start'
+            subtext='Wachten tot de groepsleider de eerste challenge start...'
+          />
         </Column>
       </ScreenContent>
     );

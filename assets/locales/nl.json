@@ -25,7 +25,8 @@
       "register": "Nog geen account? <0>Meld je aan</0>",
       "google": "Doorgaan met Google",
       "apple": "Doorgaan met Apple"
-    }
+    },
+    "emailLoginError": "Fout tijdens inloggen. Controleer je gegevens en probeer het opnieuw."
   },
   "register": {
     "title": "Aanmelden",

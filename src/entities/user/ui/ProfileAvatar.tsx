@@ -1,10 +1,7 @@
 import { Canvas, Circle, ImageSVG, LinearGradient, Skia, Text, useFont, vec } from '@shopify/react-native-skia';
 import { Image, StyleSheet, View } from 'react-native';
 
-import { sv } from 'shared/lib/theme';
-
 const CANVAS_SIZE = 100;
-const PROFILE_SHAPE_SIZE = 60;
 
 const GRADIENTS = [
   ['#8ECAE6', '#99AFDA'],
@@ -27,7 +24,7 @@ type Props = {
 };
 
 export const ProfileAvatar = ({ name, avatarUrl, size = CANVAS_SIZE }: Props) => {
-  const fontSize = sv('text.lg');
+  const fontSize = size / 3;
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-require-imports
   const font = useFont(require('../../../../assets/fonts/ArchitectsDaughter-Regular.ttf'), fontSize);
   const gradient = GRADIENTS[name.length % GRADIENTS.length];
@@ -45,14 +42,14 @@ export const ProfileAvatar = ({ name, avatarUrl, size = CANVAS_SIZE }: Props) =>
   }
 
   const textX = size / 2 - font.measureText(name[0]).width / 2;
-  const textY = size / 2 + font.measureText(name[0]).height / 2;
+  const textY = size / 2.1 + font.measureText(name[0]).height / 2;
 
   return (
     <Canvas style={{ width: size, height: size }}>
       <Circle r={size / 2} cx={size / 2} cy={size / 2}>
         <LinearGradient start={vec(size / 2, 0)} end={vec(size / 2, size)} colors={gradient} />
       </Circle>
-      <ImageSVG svg={profileShape} x={20} y={20} width={PROFILE_SHAPE_SIZE} height={PROFILE_SHAPE_SIZE} />
+      <ImageSVG svg={profileShape} x={size / 5} y={size / 5} width={size * 0.6} height={size * 0.6} />
       <Text x={textX} y={textY} text={name[0].toUpperCase()} font={font} />
     </Canvas>
   );

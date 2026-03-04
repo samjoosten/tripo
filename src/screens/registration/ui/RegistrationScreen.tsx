@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import type { RootStackParamList } from 'shared/routes';
-import { AppNavigation } from 'shared/routes';
+import type { AppNavigation } from 'shared/routes';
 import { Form } from 'shared/ui/Form';
 import { ScreenContent } from 'shared/ui/ScreenContent';
 import { FormInput } from 'shared/ui/FormInput';
@@ -19,7 +19,8 @@ import { useRegisterMutation } from '../api/useRegisterMutation';
 
 type RegistrationProps = NativeStackScreenProps<RootStackParamList, AppNavigation.REGISTER>;
 
-export const RegistrationScreen = ({ navigation }: RegistrationProps) => {
+export const RegistrationScreen = ({ route }: RegistrationProps) => {
+  const joinGroupId = route.params?.joinGroupId;
   const { t } = useTranslation();
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(useRegistrationSchema()),
@@ -28,7 +29,7 @@ export const RegistrationScreen = ({ navigation }: RegistrationProps) => {
   const { mutateAsync: register, isPending } = useRegisterMutation();
 
   const onSubmitRegistration = async (data: RegistrationSchema) => {
-    const { session, error } = await register(data);
+    const { session, error } = await register({ ...data, joinGroupId });
     if (error) {
       showErrorAlert({
         message: error.message || 'An error occurred during registration. Please try again.',
@@ -42,7 +43,7 @@ export const RegistrationScreen = ({ navigation }: RegistrationProps) => {
       });
     }
 
-    navigation.navigate(AppNavigation.MAIN);
+    // navigation.navigate(AppNavigation.MAIN);
   };
 
   return (

@@ -71,7 +71,7 @@ export const JoinGroupScreen = ({ route, navigation }: JoinGroupProps) => {
 
   const onJoinGroupPress = async () => {
     if (!isAuthenticated) {
-      // navigate to login screen and pass the current joinId so we can redirect back after login
+      navigation.navigate(AppNavigation.LOGIN, { joinGroupId: groupId });
       return;
     }
 

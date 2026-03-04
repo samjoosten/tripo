@@ -19,22 +19,35 @@ import { FormPasswordInput } from 'shared/ui/FormPasswordInput';
 import { PressableOpacity } from 'shared/ui/PressableOpacity';
 import { AnimatedScreenContent } from 'shared/ui/ScreenContent';
 import { ThemedText } from 'shared/ui/ThemedText';
+import { showErrorAlert } from 'shared/ui/Alert';
 
 import type { LoginSchema } from '../model/useLoginSchema';
 import { useLoginSchema } from '../model/useLoginSchema';
+import { useEmailLoginMutation } from '../api/useEmailLoginMutation';
 
 import { LoginHeader } from './LoginHeader';
 
 type LoginScreenProps = NativeStackScreenProps<RootStackParamList, AppNavigation.LOGIN>;
 
-export const LoginScreen = ({ navigation }: LoginScreenProps) => {
+export const LoginScreen = ({ navigation, route }: LoginScreenProps) => {
+  const joinGroupId = route.params?.joinGroupId;
   const { t } = useTranslation();
+  const { mutateAsync: emailLogin, isPending: isLoginPending } = useEmailLoginMutation();
+
   const loginSchema = useLoginSchema();
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmitLogin = (_: LoginSchema) => {};
+  const onSubmitLogin = async (data: LoginSchema) => {
+    try {
+      await emailLogin({ ...data, joinGroupId });
+    } catch {
+      showErrorAlert({
+        message: t('login.emailLoginError'),
+      });
+    }
+  };
 
   return (
     <AnimatedScreenContent entering={FadeIn} style={styles.container}>
@@ -47,6 +60,7 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
             <FormInput
               label={t('login.labels.email')}
               value={value}
+              autoCapitalize='none'
               keyboardType='email-address'
               onChangeText={onChange}
               error={errors.email?.message}
@@ -65,14 +79,14 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
             />
           )}
         />
-        <FilledButton text={t('login.buttons.login')} onPress={handleSubmit(onSubmitLogin)} />
+        <FilledButton text={t('login.buttons.login')} onPress={handleSubmit(onSubmitLogin)} loading={isLoginPending} />
         <Divider />
         <Column spacing='spacing.xs'>
           <AppleSignIn />
           <GoogleSignIn />
         </Column>
       </Form>
-      <PressableOpacity onPress={() => navigation.navigate(AppNavigation.REGISTER)}>
+      <PressableOpacity onPress={() => navigation.navigate(AppNavigation.REGISTER, { joinGroupId })}>
         <ThemedText type='body'>
           <Trans
             i18nKey={'login.buttons.register'}

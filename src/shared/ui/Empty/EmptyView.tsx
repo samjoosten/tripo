@@ -1,3 +1,5 @@
+import { StyleSheet } from 'react-native';
+
 import Column from '../Column';
 import { ThemedIcon, type IconSvgObject } from '../ThemedIcon';
 import { ThemedText } from '../ThemedText';
@@ -16,10 +18,16 @@ export const EmptyView = ({ icon, text, subtext }: Props) => {
         {text}
       </ThemedText>
       {!!subtext && (
-        <ThemedText type='body' lightColor='powderBlue.300'>
+        <ThemedText type='body' lightColor='powderBlue.300' style={styles.subtext}>
           {subtext}
         </ThemedText>
       )}
     </Column>
   );
 };
+
+const styles = StyleSheet.create({
+  subtext: {
+    textAlign: 'center',
+  },
+});

@@ -25,7 +25,8 @@
       "register": "Don't have an account? <0>Sign up</0>",
       "google": "Continue with Google",
       "apple": "Continue with Apple"
-    }
+    },
+    "emailLoginError": "Error during login. Please check your credentials and try again."
   },
   "register": {
     "title": "Register",

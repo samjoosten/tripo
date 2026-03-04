@@ -20,6 +20,7 @@ interface Resources {
         "login": "Sign in",
         "register": "Don't have an account? <0>Sign up</0>"
       },
+      "emailLoginError": "Error during login. Please check your credentials and try again.",
       "labels": {
         "email": "Email",
         "password": "Password"
@@ -75,6 +76,7 @@ interface Resources {
         "login": "Inloggen",
         "register": "Nog geen account? <0>Meld je aan</0>"
       },
+      "emailLoginError": "Fout tijdens inloggen. Controleer je gegevens en probeer het opnieuw.",
       "labels": {
         "email": "Email",
         "password": "Wachtwoord"

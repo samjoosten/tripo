@@ -1,4 +1,5 @@
 import { Logout05Icon } from '@hugeicons-pro/core-stroke-standard';
+import { useQueryClient } from '@tanstack/react-query';
 import type { TFunction } from 'i18next';
 import { Alert } from 'react-native';
 
@@ -14,7 +15,9 @@ type Props = {
 };
 
 export const SignOutButton = ({ t }: Props) => {
+  const queryClient = useQueryClient();
   const handleSignOut = async () => {
+    queryClient.clear();
     const { error } = await supabase.auth.signOut();
     if (error) {
       showErrorAlert({ message: t('shared.tryAgainLater'), data: error });

@@ -43,10 +43,10 @@ export const GroupMemberSlot = ({ avatarUrl, name, isLoading, isEmpty, size = SI
   }
 
   if (isEmpty) {
-    return <EmptyJoinSlot size={size} />;
+    return <EmptyJoinSlot size={size - 2} />;
   }
 
-  return <ProfileAvatar avatarUrl={avatarUrl} name={name} size={size} />;
+  return <ProfileAvatar avatarUrl={avatarUrl} name={name} size={size + 2} />;
 };
 
 const styles = StyleSheet.create({
